@@ -20,7 +20,7 @@ export const UserInfo: React.FC<UserInfoProps> = ({
 }) => {
   return (
     <div className="flex flex-col md:flex-row justify-between items-start md:items-center px-8 py-4 mt-16">
-      <h1 className="text-3xl font-bold mb-4 md:mb-0">{name}</h1>
+      <h1 className="text-5xl font-bold mb-4 md:mb-0 text-[#2e657a]">{name}</h1>
       
       {/* Two-column layout for contact and links */}
       <div className="grid grid-cols-3 gap-x-8 gap-y-2 text-gray-600">

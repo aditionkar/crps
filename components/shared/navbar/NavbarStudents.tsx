@@ -21,7 +21,7 @@ export function NavbarStudents() {
 
           {/* Desktop Menu */}
           <div className="hidden md:flex gap-4">
-            <Link href="/">
+            <Link href="/student">
               <button className="px-4 py-2 text-gray-600 hover:text-gray-900 transition-all duration-200 hover:scale-105 hover:bg-[#dae1e6] rounded-md">
                 Home
               </button>
@@ -42,6 +42,12 @@ export function NavbarStudents() {
             <Link href="/student/my-profile">
               <button className="px-4 py-2 text-gray-600 hover:text-gray-900 transition-all duration-200 hover:scale-105 hover:bg-[#dae1e6] rounded-md">
                 My Profile
+              </button>
+            </Link>
+
+            <Link href="/">
+              <button className="w-full text-left px-4 py-2 bg-[#2e657a] text-white rounded-lg transition-all duration-200 hover:bg-[#548d97] hover:scale-105 hover:shadow-lg active:scale-95">
+                Logout
               </button>
             </Link>
           </div>
@@ -75,7 +81,7 @@ export function NavbarStudents() {
           </button>
 
           <nav className="flex flex-col space-y-4 mt-10">
-            <Link href="/">
+            <Link href="/student">
               <button className="w-full text-left px-4 py-2 text-gray-600 hover:text-gray-900 duration-200 hover:scale-105 hover:bg-[#dae1e6] rounded-md">
                 Home
               </button>
@@ -96,6 +102,12 @@ export function NavbarStudents() {
             <Link href="/student/my-profile">
               <button className="w-full text-left px-4 py-2 text-gray-600 hover:text-gray-900 duration-200 hover:scale-105 hover:bg-[#dae1e6] rounded-md">
                 My Profile
+              </button>
+            </Link>
+
+            <Link href="/">
+              <button className="w-full text-left px-4 py-2 text-gray-600 hover:text-gray-900 duration-200 hover:scale-105 hover:bg-[#dae1e6] rounded-md">
+                Logout
               </button>
             </Link>
           </nav>

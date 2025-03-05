@@ -3,6 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState, ChangeEvent, FormEvent } from "react";
+import { useRouter } from "next/navigation";
 import { Navbar } from "@/components/shared/navbar/Navbar";
 
 interface StudentFormData {
@@ -14,7 +15,7 @@ interface StudentFormData {
 }
 
 interface CompanyFormData {
-  company_name: string;
+  name: string;
   email: string;
   password: string;
   industry: string;
@@ -22,6 +23,8 @@ interface CompanyFormData {
 }
 
 function SignUpPage() {
+    const router = useRouter();
+
   const [userType, setUserType] = useState<"student" | "company">("student");
   const [studentData, setStudentData] = useState<StudentFormData>({
     name: "",
@@ -31,12 +34,13 @@ function SignUpPage() {
     resume_link: "",
   });
   const [companyData, setCompanyData] = useState<CompanyFormData>({
-    company_name: "",
+    name: "",
     email: "",
     password: "",
     industry: "",
     website: "",
   });
+  const [error, setError] = useState<string | null>(null);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     if (userType === "student") {
@@ -46,10 +50,34 @@ function SignUpPage() {
     }
   };
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("Form submitted:", userType === "student" ? studentData : companyData);
-    // Add API call or validation logic here
+    setError(null);
+    const userData = userType === "student" ? studentData : companyData;
+    const payload = { ...userData, type: userType };
+    
+    try {
+      const response = await fetch("http://localhost:3000/api/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || "Signup failed");
+    }
+    router.push("/login");
+    } catch (error) {
+        if (error instanceof Error) {
+            setError("An error occurred.");
+          } else {
+            setError("An unknown error occurred.");
+          }
+    }
   };
 
   return (
@@ -64,6 +92,23 @@ function SignUpPage() {
             <div className="w-full md:w-1/2 py-10 px-5 md:px-10">
               <h2 className="text-3xl font-bold text-gray-800 mb-5">Sign Up</h2>
               <p className="text-sm text-gray-600 mb-5">Create your account. It’s free and only takes a minute.</p>
+              {error && (<div className="flex items-center space-x-2 bg-red-100 text-red-600 px-4 py-2 rounded-lg mb-5 border border-red-400">
+                  <svg
+                    className="w-5 h-5 text-red-600"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M6 18L18 6M6 6l12 12"
+                    />
+                  </svg>
+                  <span className="text-sm font-semibold">{error}</span>
+                </div>)}
               <div className="">
                 <label className="text-xs font-semibold px-1">I am a:</label>
                 <select
@@ -96,7 +141,7 @@ function SignUpPage() {
                 ) : (
                   <>
                     <label htmlFor="company_name" className="text-xs font-semibold px-1">Company Name</label>
-                    <input type="text" name="company_name" placeholder="Tech Solutions Inc." value={companyData.company_name} onChange={handleChange} required className="input-field" />
+                    <input type="text" name="name" placeholder="Tech Solutions Inc." value={companyData.name} onChange={handleChange} required className="input-field" />
 
                     <label htmlFor="email" className="text-xs font-semibold px-1">Email</label>
                     <input type="email" name="email" placeholder="contact@company.com" value={companyData.email} onChange={handleChange} required className="input-field" />

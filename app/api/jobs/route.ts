@@ -4,9 +4,9 @@ import { RowDataPacket } from "mysql2";
 
 export async function GET() {
   try {
-    // Fetch job postings from the database
     const [jobs] = await pool.query<RowDataPacket[]>(
-      "SELECT jobs_id, company_id, company_name, title, description, location, salary, city, requirements FROM jobs"
+      `SELECT jobs_id, company_id, company_name, title, description, location, salary, city, requirements, posted_days_ago 
+       FROM jobs`
     );
 
     return NextResponse.json(jobs, { status: 200 });

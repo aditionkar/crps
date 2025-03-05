@@ -12,6 +12,7 @@ interface Job {
   salary: string;
   city: string;
   requirements: string;
+  posted_days_ago: number;
 }
 
 function ViewJobs() {
@@ -56,6 +57,9 @@ function ViewJobs() {
                 <p className="text-[#1f2021]">{job.description}</p>
                 <p className="text-[#1f2021] font-medium">Requirements:</p>
                 <p className="text-[#1f2021]">{job.requirements}</p>
+                <p className="text-[#548d97] font-medium">
+                  Posted {job.posted_days_ago} {job.posted_days_ago === 1 ? "day" : "days"} ago
+                </p>
                 <button className="mt-2 bg-[#78bed8] text-white px-4 py-2 rounded-md hover:bg-[#548d97] w-full sm:w-auto">
                   Apply
                 </button>

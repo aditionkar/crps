@@ -6,6 +6,10 @@ import { Menu, X } from "lucide-react";
 export function NavbarStudents() {
   const [isOpen, setIsOpen] = useState(false);
 
+  const handleClick = () => {
+
+  }
+
   return (
     <nav className="w-full border-b bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -20,8 +24,8 @@ export function NavbarStudents() {
           </div>
 
           {/* Desktop Menu */}
-          <div className="hidden md:flex gap-4">
-            <Link href="/student">
+          <div className="hidden md:flex gap-4" >
+            <Link href="/student" onClick={handleClick}>
               <button className="px-4 py-2 text-gray-600 hover:text-gray-900 transition-all duration-200 hover:scale-105 hover:bg-[#dae1e6] rounded-md">
                 Home
               </button>

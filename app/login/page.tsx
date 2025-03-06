@@ -71,8 +71,8 @@ const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
           style={{ maxWidth: "1000px" }}
         >
           <div className="md:flex w-full">
-            <div className="hidden md:block w-1/2 bg-green-600 py-10 px-10">
-              <Image src="/Security-bro2.svg" alt="Security" width={600} height={600} />
+            <div className="hidden md:block w-1/2 bg-[#78bed8] py-10 px-10">
+              <Image src="/SecurityBro2.svg" alt="Security" width={600} height={600} />
             </div>
             <div className="w-full md:w-1/2 py-10 px-5 md:px-10">
               <h2 className="text-3xl font-bold text-gray-800 mb-5">Log in</h2>
@@ -121,13 +121,13 @@ const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
                   <div className="w-full px-3">
                     <button
                       type="submit"
-                      className="block w-full text-white text-sm font-semibold rounded-lg px-4 py-2 bg-green-600 hover:bg-green-700"
+                      className="block w-full text-white text-sm font-semibold rounded-lg px-4 py-2 bg-[#78bed8] hover:bg-[#4d8ba1]"
                     >
                       Login
                     </button>
                     <Link
                       href="/signin"
-                      className="mt-3 text-center block w-full bg-green-600 hover:bg-green-700 text-white text-sm font-semibold rounded-lg px-4 py-2"
+                      className="mt-3 text-center block w-full bg-[#78bed8] hover:bg-[#4d8ba1] text-white text-sm font-semibold rounded-lg px-4 py-2"
                     >
                       Don't have an account? Sign in here
                     </Link>

@@ -86,8 +86,8 @@ function SignUpPage() {
       <div className="min-w-screen flex items-center justify-center px-5 py-5 bg-white ">
         <div className="bg-gray-100 text-gray-500 rounded-3xl shadow-xl w-full overflow-hidden" style={{ maxWidth: "1000px" }}>
           <div className="md:flex w-full">
-            <div className="hidden md:block w-1/2 bg-green-600 py-10 px-10">
-              <Image src="/Security-bro.svg" alt="Security-bro" width={600} height={600} />
+            <div className="hidden md:block w-1/2 bg-[#78bed8] py-28 px-10">
+              <Image src="/SecurityBro3.svg" alt="Security-bro" width={600} height={600}/>
             </div>
             <div className="w-full md:w-1/2 py-10 px-5 md:px-10">
               <h2 className="text-3xl font-bold text-gray-800 mb-5">Sign Up</h2>
@@ -156,9 +156,9 @@ function SignUpPage() {
                     <input type="text" name="website" placeholder="https://company-website.com" value={companyData.website} onChange={handleChange} className="input-field" />
                   </>
                 )}
-                <button type="submit" className="block w-full text-white text-sm font-semibold mt-3 rounded-lg px-4 py-2 bg-green-600 hover:bg-green-700">Create Account</button>
+                <button type="submit" className="block w-full text-white text-sm font-semibold mt-3 rounded-lg px-4 py-2 bg-[#78bed8] hover:bg-[#4d8ba1]">Create Account</button>
               </form>
-              <Link href="/login" className="mt-2 text-center block w-full bg-green-600 hover:bg-green-700 text-white text-sm font-semibold rounded-lg px-4 py-2">
+              <Link href="/login" className="mt-2 text-center block w-full bg-[#78bed8] hover:bg-[#4d8ba1] text-white text-sm font-semibold rounded-lg px-4 py-2">
                 Already have an account? Log in here
               </Link>
               <div className="mt-4 text-center text-xs text-gray-600 flex justify-center">

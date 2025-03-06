@@ -66,7 +66,8 @@ function App() {
   return (
     <>
       <NavbarStudents />
-      <div className="min-h-screen bg-white">
+      <div className="min-h-screen bg-[#dae1e6] ">
+        <div className="bg-[#dae1e6] w-full h-10"></div>
         <ProfilePicture
           profileUrl={profile.profileUrl}
           bannerUrl={profile.bannerUrl}

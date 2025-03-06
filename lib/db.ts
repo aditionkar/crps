@@ -1,7 +1,7 @@
 import mysql from 'mysql2/promise';
 import dotenv from 'dotenv';
 
-dotenv.config(); // Load environment variables
+dotenv.config(); 
 
 const pool = mysql.createPool({
     host: process.env.DATABASE_HOST as string,
@@ -9,7 +9,7 @@ const pool = mysql.createPool({
     password: process.env.DATABASE_PASSWORD as string,
     database: process.env.DATABASE_NAME as string,
     waitForConnections: true,
-    connectionLimit: 10, // Allow multiple concurrent connections
+    connectionLimit: 10,
     queueLimit: 0,
 });
 

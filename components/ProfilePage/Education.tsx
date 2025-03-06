@@ -49,7 +49,7 @@ export const Education: React.FC<EducationProps> = ({ education, onSave }) => {
   return (
     <div className="bg-white rounded-lg shadow-md p-6 mt-6">
       <div className="flex justify-between items-center mb-4">
-        <h2 className="text-2xl font-bold">Education</h2>
+        <h2 className="text-2xl font-bold text-black">Education</h2>
         {isEditing ? (
           <button
             onClick={handleSave}
@@ -78,7 +78,7 @@ export const Education: React.FC<EducationProps> = ({ education, onSave }) => {
                 placeholder="Institution Name"
                 value={entry.institution}
                 onChange={(e) => handleChange(entry.id, "institution", e.target.value)}
-                className="w-full p-2 border rounded-md mb-2"
+                className="w-full p-2 border rounded-md mb-2 text-black"
               />
               <div className="flex gap-2">
                 <input
@@ -86,14 +86,14 @@ export const Education: React.FC<EducationProps> = ({ education, onSave }) => {
                   placeholder="City"
                   value={entry.city}
                   onChange={(e) => handleChange(entry.id, "city", e.target.value)}
-                  className="w-1/2 p-2 border rounded-md"
+                  className="w-1/2 p-2 border rounded-md text-black"
                 />
                 <input
                   type="text"
                   placeholder="State"
                   value={entry.state}
                   onChange={(e) => handleChange(entry.id, "state", e.target.value)}
-                  className="w-1/2 p-2 border rounded-md"
+                  className="w-1/2 p-2 border rounded-md text-black"
                 />
               </div>
               <button
@@ -118,7 +118,7 @@ export const Education: React.FC<EducationProps> = ({ education, onSave }) => {
           {educationList.length > 0 ? (
             educationList.map((entry) => (
               <li key={entry.id} className="mb-2">
-                <p className="text-lg font-semibold">{entry.institution}</p>
+                <p className="text-lg font-semibold text-black">{entry.institution}</p>
                 <p className="text-gray-600">
                   {entry.city}, {entry.state}
                 </p>

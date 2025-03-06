@@ -35,7 +35,7 @@ export const Skills: React.FC<SkillsProps> = ({
   return (
     <div className="bg-white rounded-lg shadow-md p-6 mt-6">
       <div className="flex justify-between items-center mb-4">
-        <h2 className="text-2xl font-bold">Skills</h2>
+        <h2 className="text-2xl font-bold text-black">Skills</h2>
         {isEditing ? (
           <button
             onClick={handleSave}
@@ -64,7 +64,7 @@ export const Skills: React.FC<SkillsProps> = ({
               onChange={(e) => setNewSkill(e.target.value)}
               onKeyPress={(e) => e.key === 'Enter' && addSkill()}
               placeholder="Add a new skill"
-              className="flex-1 p-2 border rounded-md"
+              className="flex-1 p-2 border rounded-md text-black"
             />
             <button
               onClick={addSkill}
@@ -78,7 +78,7 @@ export const Skills: React.FC<SkillsProps> = ({
             {currentSkills.map((skill) => (
               <div
                 key={skill}
-                className="flex items-center gap-2 px-3 py-1 bg-gray-100 rounded-full"
+                className="flex items-center gap-2 px-3 py-1 bg-gray-100 rounded-full text-black"
               >
                 <span>{skill}</span>
                 <button

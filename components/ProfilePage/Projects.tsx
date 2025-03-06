@@ -56,7 +56,7 @@ export const Projects: React.FC<ProjectsProps> = ({
   return (
     <div className="bg-white rounded-lg shadow-md p-6 mt-6">
       <div className="flex justify-between items-center mb-6">
-        <h2 className="text-2xl font-bold">Projects</h2>
+        <h2 className="text-2xl font-bold text-black">Projects</h2>
         {isEditing ? (
           <div className="flex gap-2">
             <button
@@ -98,14 +98,14 @@ export const Projects: React.FC<ProjectsProps> = ({
                     <img
                       src={project.imageUrl}
                       alt={project.name}
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-cover text-black"
                     />
                   ) : (
                     <div className="text-center">
                       <input
                         type="text"
                         placeholder="Enter image URL"
-                        className="w-full p-2 border rounded-md"
+                        className="w-full p-2 border rounded-md text-black"
                         value={project.imageUrl}
                         onChange={(e) =>
                           updateProject(project.id, 'imageUrl', e.target.value)
@@ -117,7 +117,7 @@ export const Projects: React.FC<ProjectsProps> = ({
                 <input
                   type="text"
                   placeholder="Project Name"
-                  className="w-full p-2 border rounded-md"
+                  className="w-full p-2 border rounded-md text-black"
                   value={project.name}
                   onChange={(e) =>
                     updateProject(project.id, 'name', e.target.value)
@@ -125,7 +125,7 @@ export const Projects: React.FC<ProjectsProps> = ({
                 />
                 <textarea
                   placeholder="Project Description"
-                  className="w-full p-2 border rounded-md"
+                  className="w-full p-2 border rounded-md text-black"
                   rows={3}
                   value={project.description}
                   onChange={(e) =>
@@ -137,7 +137,7 @@ export const Projects: React.FC<ProjectsProps> = ({
                   <input
                     type="text"
                     placeholder="Project Link"
-                    className="flex-1 p-2 border rounded-md"
+                    className="flex-1 p-2 border rounded-md text-black"
                     value={project.link}
                     onChange={(e) =>
                       updateProject(project.id, 'link', e.target.value)
@@ -162,7 +162,7 @@ export const Projects: React.FC<ProjectsProps> = ({
                   />
                 </div>
                 <div className="p-4">
-                  <h3 className="font-bold text-lg mb-2">{project.name}</h3>
+                  <h3 className="font-bold text-lg mb-2 text-black">{project.name}</h3>
                   <p className="text-gray-600 mb-4">{project.description}</p>
                   {project.link && (
                     <a

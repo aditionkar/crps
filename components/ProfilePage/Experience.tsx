@@ -56,7 +56,7 @@ export const Experience: React.FC<ExperienceProps> = ({ experience, onSave }) =>
   return (
     <div className="bg-white rounded-lg shadow-md p-6 mt-6">
       <div className="flex justify-between items-center mb-4">
-        <h2 className="text-2xl font-bold">Experience</h2>
+        <h2 className="text-2xl font-bold text-black">Experience</h2>
         {isEditing ? (
           <button
             onClick={handleSave}
@@ -85,7 +85,7 @@ export const Experience: React.FC<ExperienceProps> = ({ experience, onSave }) =>
                 placeholder="Company Name"
                 value={entry.company}
                 onChange={(e) => handleChange(entry.id, "company", e.target.value)}
-                className="w-full p-2 border rounded-md mb-2"
+                className="w-full p-2 border rounded-md mb-2 text-black"
               />
               <div className="flex gap-2">
                 <input
@@ -93,14 +93,14 @@ export const Experience: React.FC<ExperienceProps> = ({ experience, onSave }) =>
                   placeholder="City"
                   value={entry.city}
                   onChange={(e) => handleChange(entry.id, "city", e.target.value)}
-                  className="w-1/3 p-2 border rounded-md"
+                  className="w-1/3 p-2 border rounded-md text-black"
                 />
                 <input
                   type="text"
                   placeholder="State"
                   value={entry.state}
                   onChange={(e) => handleChange(entry.id, "state", e.target.value)}
-                  className="w-1/3 p-2 border rounded-md"
+                  className="w-1/3 p-2 border rounded-md text-black"
                 />
               </div>
               <div className="flex gap-4 mt-2">
@@ -110,7 +110,7 @@ export const Experience: React.FC<ExperienceProps> = ({ experience, onSave }) =>
                     type="month"
                     value={entry.startDate}
                     onChange={(e) => handleChange(entry.id, "startDate", e.target.value)}
-                    className="p-2 border rounded-md"
+                    className="p-2 border rounded-md text-black"
                   />
                 </div>
                 <div className="flex flex-col">
@@ -119,7 +119,7 @@ export const Experience: React.FC<ExperienceProps> = ({ experience, onSave }) =>
                     type="month"
                     value={entry.endDate}
                     onChange={(e) => handleChange(entry.id, "endDate", e.target.value)}
-                    className="p-2 border rounded-md"
+                    className="p-2 border rounded-md text-black"
                     placeholder="End Date"
                   />
                 </div>
@@ -146,7 +146,7 @@ export const Experience: React.FC<ExperienceProps> = ({ experience, onSave }) =>
           {experienceList.length > 0 ? (
             experienceList.map((entry) => (
               <li key={entry.id} className="mb-4">
-                <p className="text-lg font-semibold">{entry.company}</p>
+                <p className="text-lg font-semibold text-black">{entry.company}</p>
                 <p className="text-gray-600">
                   {entry.city}, {entry.state}
                 </p>

@@ -33,7 +33,7 @@ export const ProfilePicture: React.FC<ProfilePictureProps> = ({
   };
 
   return (
-    <div className="relative w-full">
+    <div className="relative bg-white rounded-lg shadow-md p-2 mx-20 ">
       {/* Banner Section */}
       <div className="relative h-48 bg-gray-200">
         {bannerUrl ? (

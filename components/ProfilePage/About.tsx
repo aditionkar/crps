@@ -10,16 +10,15 @@ export const About: React.FC<AboutMeProps> = ({ about, onSave }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [currentAbout, setCurrentAbout] = useState(about);
 
-  // Handle saving the about text
   const handleSave = () => {
-    onSave({ about: currentAbout }); // Update parent component with new text
-    setIsEditing(false); // Exit edit mode
+    onSave({ about: currentAbout });
+    setIsEditing(false); 
   };
 
   return (
     <div className="bg-white rounded-lg shadow-md p-6 mt-20">
       <div className="flex justify-between items-center mb-4">
-        <h2 className="text-2xl font-bold">About Me</h2>
+        <h2 className="text-2xl font-bold text-black">About Me</h2>
         {isEditing ? (
           <button
             onClick={handleSave}
@@ -41,7 +40,7 @@ export const About: React.FC<AboutMeProps> = ({ about, onSave }) => {
 
       {isEditing ? (
         <textarea
-          className="w-full p-2 border rounded-md"
+          className="w-full p-2 border rounded-md text-black"
           rows={6}
           value={currentAbout}
           onChange={(e) => setCurrentAbout(e.target.value)}

@@ -105,7 +105,6 @@ function ViewApplicantsOfJobs() {
       <NavbarRecruiters />
       <div className="bg-[#dae1e6] min-h-screen pt-10 pb-16 px-6">
         <div className="max-w-5xl mx-auto">
-          {/* Page Header */}
           <div className="mb-8 mx-auto text-center">
             <h1 className="text-[#2e657a] text-3xl md:text-4xl items-center font-bold tracking-tight ">
               Applicants for Your Jobs
@@ -114,8 +113,6 @@ function ViewApplicantsOfJobs() {
               Review and manage applicants for your job postings.
             </p>
           </div>
-
-          {/* Applicants Container */}
           <div className="w-full space-y-6">
             {applicants.length > 0 ? (
               applicants.map((applicant) => (
@@ -124,7 +121,7 @@ function ViewApplicantsOfJobs() {
                   className="bg-white rounded-xl shadow-sm hover:shadow-md transition-all p-6 border border-[#91b6be]/30"
                 >
                   <div className="flex flex-col md:flex-row md:items-start justify-between gap-4">
-                    {/* Left Side: Applicant Details */}
+
                     <div className="space-y-2 flex-1">
                       <h2 className="text-[#1f2021] font-bold text-xl md:text-2xl">
                         {applicant.name}
@@ -136,7 +133,6 @@ function ViewApplicantsOfJobs() {
                         Applied for: {applicant.jobTitle} at {applicant.company}
                       </p>
 
-                      {/* Status */}
                       {scheduledInterviews[applicant.id] ? (
                         <p className="bg-green-100 text-green-700 text-sm font-semibold px-3 py-1 rounded-md shadow-sm border border-green-400">
                            Interview Scheduled on:{" "}
@@ -149,7 +145,6 @@ function ViewApplicantsOfJobs() {
                       ) : null}
                     </div>
 
-                    {/* Right Side: Action Buttons */}
                     <div className="flex flex-col sm:flex-row gap-2 mt-7 px-8">
                       <a
                         href={applicant.resumeLink}
@@ -186,7 +181,6 @@ function ViewApplicantsOfJobs() {
           </div>
         </div>
 
-        {/* Scheduling Modal */}
         {selectedApplicant && (
           <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
             <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md z-50">
@@ -194,7 +188,6 @@ function ViewApplicantsOfJobs() {
                 Schedule Interview for {selectedApplicant.name}
               </h2>
               <div className="space-y-4">
-                {/* Date Input */}
                 <div>
                   <label className="block text-sm font-medium text-[#2e657a] mb-1 ">
                     Date
@@ -206,7 +199,6 @@ function ViewApplicantsOfJobs() {
                     className="border border-gray-300 p-2 rounded-md w-full text-black"
                   />
                 </div>
-                {/* Time Input */}
                 <div>
                   <label className="block text-sm font-medium text-[#2e657a] mb-1">
                     Time

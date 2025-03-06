@@ -48,7 +48,6 @@ function ViewJobs() {
       <NavbarStudents />
       <div className="bg-[#dae1e6] min-h-screen pt-10 pb-16 px-6">
         <div className="max-w-5xl mx-auto">
-          {/* Page Header */}
           <div className="mb-8">
             <div className="inline-flex items-center px-3 py-1 rounded-full bg-[#2e657a]/10 text-[#2e657a] text-sm font-medium mb-2">
               <CalendarDays className="h-4 w-4 mr-2" />
@@ -62,8 +61,6 @@ function ViewJobs() {
               students.
             </p>
           </div>
-
-          {/* Job Listings Container */}
           <div className="w-full space-y-6">
             {loading ? (
               <p className="text-[#1f2021] text-lg">Loading jobs...</p>
@@ -79,7 +76,6 @@ function ViewJobs() {
   );
 }
 
-// Job Card Component
 const JobCard: React.FC<{ job: Job }> = ({ job }) => {
   return (
     <div className="relative bg-white rounded-xl shadow-sm hover:shadow-md transition-all p-6 border border-[#91b6be]/30">
@@ -112,7 +108,6 @@ const JobCard: React.FC<{ job: Job }> = ({ job }) => {
             </p>
           </div>
 
-          {/* Job Details */}
           <div className="grid grid-cols-1 gap-3">
             <div className="flex items-center text-sm text-[#548d97]">
               <Building className="h-4 w-4 mr-2 text-[#78bed8]" />
@@ -153,7 +148,6 @@ const JobCard: React.FC<{ job: Job }> = ({ job }) => {
         </div>
       </div>
 
-      {/* Action Buttons */}
       <div className="flex flex-col sm:flex-row gap-2 mt-6 pt-4 border-t border-[#91b6be]/20">
         <button className="bg-[#78bed8] text-white px-6 py-2 rounded-lg hover:bg-[#548d97] transition-colors flex-1 flex items-center justify-center">
           Apply Now

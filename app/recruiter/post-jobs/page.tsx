@@ -8,7 +8,7 @@ function PostJobs() {
     company: '',
     location: '',
     city: '',
-    salary: '',
+    salary: '', 
     requirements: ''
   });
   const [postedJobs, setPostedJobs] = useState<any[]>([]);
@@ -29,12 +29,12 @@ function PostJobs() {
       <div className="bg-[#dae1e6] min-h-screen flex flex-col items-center p-6">
         <h1 className="text-[#2e657a] text-3xl font-bold mb-6">Post a New Job</h1>
         <form className="w-full max-w-2xl bg-white shadow-lg rounded-lg p-6 space-y-4" onSubmit={handleSubmit}>
-          <input type="text" name="title" placeholder="Job Title" className="w-full p-2 border rounded" value={job.title} onChange={handleChange} required />
-          <input type="text" name="company" placeholder="Company Name" className="w-full p-2 border rounded" value={job.company} onChange={handleChange} required />
-          <input type="text" name="location" placeholder="Job Location" className="w-full p-2 border rounded" value={job.location} onChange={handleChange} required />
-          <input type="text" name="city" placeholder="City" className="w-full p-2 border rounded" value={job.city} onChange={handleChange} required />
-          <input type="text" name="salary" placeholder="Salary Range" className="w-full p-2 border rounded" value={job.salary} onChange={handleChange} required />
-          <textarea name="requirements" placeholder="Job Requirements" className="w-full p-2 border rounded" value={job.requirements} onChange={handleChange} required />
+          <input type="text" name="title" placeholder="Job Title" className="w-full p-2 border rounded text-black" value={job.title} onChange={handleChange} required />
+          <input type="text" name="company" placeholder="Company Name" className="w-full p-2 border rounded text-black" value={job.company} onChange={handleChange} required />
+          <input type="text" name="location" placeholder="Job Location" className="w-full p-2 border rounded text-black" value={job.location} onChange={handleChange} required />
+          <input type="text" name="city" placeholder="City" className="w-full p-2 border rounded text-black" value={job.city} onChange={handleChange} required />
+          <input type="text" name="salary" placeholder="Salary Range" className="w-full p-2 border rounded text-black" value={job.salary} onChange={handleChange} required />
+          <textarea name="requirements" placeholder="Job Requirements" className="w-full p-2 border rounded text-black" value={job.requirements} onChange={handleChange} required />
           <button type="submit" className="mt-2 bg-[#78bed8] text-white px-4 py-2 rounded-md hover:bg-[#548d97] w-full">Post Job</button>
         </form>
 

@@ -9,8 +9,42 @@ export default {
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        primary: {
+          DEFAULT: "#2e657a",
+          light: "#78bed8",
+        },
+        secondary: {
+          DEFAULT: "#548d97",
+          light: "#91b6be",
+        },
+        accent: {
+          DEFAULT: "#89a9c4",
+          light: "#c6f6ff",
+          lighter: "#e3fbff",
+        },
+        background: "#ffffff",
+        muted: "#dae1e6",
+        border: "hsl(var(--border))",
+        input: "hsl(var(--input))",
+        ring: "hsl(var(--ring))",
+        foreground: "hsl(var(--foreground))",
+        destructive: {
+          DEFAULT: "hsl(var(--destructive))",
+          foreground: "hsl(var(--destructive-foreground))",
+        },
+        card: {
+          DEFAULT: "hsl(var(--card))",
+          foreground: "hsl(var(--card-foreground))",
+        },
+        popover: {
+          DEFAULT: "hsl(var(--popover))",
+          foreground: "hsl(var(--popover-foreground))",
+        },
+      },
+      borderRadius: {
+        lg: "var(--radius)",
+        md: "calc(var(--radius) - 2px)",
+        sm: "calc(var(--radius) - 4px)",
       },
       fontFamily: {
         poppins: ['Poppins', 'sans-serif'],

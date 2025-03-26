@@ -4,6 +4,7 @@ import Image from "next/image";
 
 function HeroComponent() {
   return (
+    <>
     <section className="relative bg-gradient-to-b from-primary to-secondary py-20 text-white overflow-hidden">
       <div className="container mx-auto px-4 py-16 sm:px-6 lg:flex lg:items-center lg:gap-12 lg:px-8">
         <div className="lg:w-1/2">
@@ -45,7 +46,7 @@ function HeroComponent() {
       </div>
 
       {/* Animated Waves */}
-      <div className="absolute bottom-0 left-0 right-0">
+      <div className="absolute bottom-0 left-0 right-0 ">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" className="w-full animate-wave">
           <path
             fill="#ffffff"
@@ -74,6 +75,25 @@ function HeroComponent() {
         }
       `}</style>
     </section>
+    <section className="bg-gradient-to-r from-primary to-secondary py-20 text-white">
+    <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-3xl text-center">
+        <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">Ready to Start Your Career Journey?</h2>
+        <p className="mx-auto mt-4 max-w-xl text-lg">
+          Join thousands of students and recruiters already using our platform to connect talent with opportunity.
+        </p>
+        <div className="mt-10 flex flex-col justify-center space-y-4 sm:flex-row sm:space-x-4 sm:space-y-0">
+          <button className="px-6 py-3 bg-white text-primary font-semibold rounded-lg hover:bg-accent-lighter">
+            <Link href="/auth/register?type=student">Sign Up as Student</Link>
+          </button>
+          <button className="px-6 py-3 border border-white text-white font-semibold rounded-lg hover:bg-white/10">
+            <Link href="/auth/register?type=recruiter">Sign Up as Recruiter</Link>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+  </>
   );
 }
 

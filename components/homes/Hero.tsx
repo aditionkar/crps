@@ -1,6 +1,8 @@
 import Link from "next/link";
 import React from "react";
 import Image from "next/image";
+import { ArrowRight, CheckCircle, Briefcase, Users, Calendar, Award } from "lucide-react"
+
 
 function HeroComponent() {
   return (
@@ -75,6 +77,124 @@ function HeroComponent() {
         }
       `}</style>
     </section>
+
+    {/* Features Section */}
+    <section className="py-20">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center">
+            <h2 className="text-3xl font-bold tracking-tight text-primary sm:text-4xl">Why Choose Our Platform?</h2>
+            <p className="mx-auto mt-4 max-w-2xl text-lg text-gray-600">
+              We provide the tools and resources to help students and recruiters connect efficiently.
+            </p>
+          </div>
+
+          <div className="mt-16 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+            {/* Feature 1 */}
+            <div className="rounded-xl bg-accent-lighter p-8 shadow-lg transition-all hover:shadow-xl">
+              <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-full bg-primary text-white">
+                <Briefcase className="h-6 w-6" />
+              </div>
+              <h3 className="mb-3 text-xl font-bold text-primary">Job Matching</h3>
+              <p className="text-gray-600">
+                Our intelligent algorithm matches students with jobs that fit their skills and career goals.
+              </p>
+            </div>
+
+            {/* Feature 2 */}
+            <div className="rounded-xl bg-accent-lighter p-8 shadow-lg transition-all hover:shadow-xl">
+              <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-full bg-primary text-white">
+                <Users className="h-6 w-6" />
+              </div>
+              <h3 className="mb-3 text-xl font-bold text-primary">Talent Discovery</h3>
+              <p className="text-gray-600">
+                Recruiters can easily find and connect with qualified candidates from top universities.
+              </p>
+            </div>
+
+            {/* Feature 3 */}
+            <div className="rounded-xl bg-accent-lighter p-8 shadow-lg transition-all hover:shadow-xl">
+              <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-full bg-primary text-white">
+                <Calendar className="h-6 w-6" />
+              </div>
+              <h3 className="mb-3 text-xl font-bold text-primary">Interview Scheduling</h3>
+              <p className="text-gray-600">
+                Streamlined interview scheduling with automated reminders and calendar integration.
+              </p>
+            </div>
+
+            {/* Feature 4 */}
+            <div className="rounded-xl bg-accent-lighter p-8 shadow-lg transition-all hover:shadow-xl">
+              <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-full bg-primary text-white">
+                <Award className="h-6 w-6" />
+              </div>
+              <h3 className="mb-3 text-xl font-bold text-primary">Profile Showcase</h3>
+              <p className="text-gray-600">
+                Students can create professional profiles to showcase their skills and achievements.
+              </p>
+            </div>
+
+            {/* Feature 5 */}
+            <div className="rounded-xl bg-accent-lighter p-8 shadow-lg transition-all hover:shadow-xl">
+              <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-full bg-primary text-white">
+                <CheckCircle className="h-6 w-6" />
+              </div>
+              <h3 className="mb-3 text-xl font-bold text-primary">Application Tracking</h3>
+              <p className="text-gray-600">
+                Track application status in real-time and receive updates on your job applications.
+              </p>
+            </div>
+
+            {/* Feature 6 */}
+            <div className="rounded-xl bg-accent-lighter p-8 shadow-lg transition-all hover:shadow-xl">
+              <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-full bg-primary text-white">
+                <ArrowRight className="h-6 w-6" />
+              </div>
+              <h3 className="mb-3 text-xl font-bold text-primary">Career Resources</h3>
+              <p className="text-gray-600">
+                Access to resume templates, interview tips, and career development resources.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Top Companies Section (For Students) */}
+      <section className="bg-muted py-20">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center">
+            <h2 className="text-3xl font-bold tracking-tight text-primary sm:text-4xl">Top Companies Hiring</h2>
+            <p className="mx-auto mt-4 max-w-2xl text-lg text-gray-600">
+              Connect with industry-leading companies looking for fresh talent.
+            </p>
+          </div>
+
+          <div className="mt-16 grid grid-cols-2 gap-8 md:grid-cols-3 lg:grid-cols-6">
+            {[1, 2, 3, 4, 5, 6].map((i) => (
+              <div key={i} className="flex items-center justify-center">
+                <div className="rounded-lg bg-white p-6 shadow-md transition-all hover:shadow-lg">
+                  <Image
+                    src={`/placeholder.svg?height=80&width=120&text=Company ${i}`}
+                    alt={`Company ${i}`}
+                    width={120}
+                    height={80}
+                    className="mx-auto"
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-12 text-center">
+            <button  className="bg-primary text-white hover:bg-primary/90">
+              <Link href="/dashboard/student/view-jobs">
+                View All Jobs <ArrowRight className="ml-2 h-4 w-4" />
+              </Link>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
     <section className="bg-gradient-to-r from-primary to-secondary py-20 text-white">
     <div className="container mx-auto px-4 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-3xl text-center">

@@ -2,6 +2,7 @@ import Link from "next/link";
 import React from "react";
 import Image from "next/image";
 import { ArrowRight, CheckCircle, Briefcase, Users, Calendar, Award } from "lucide-react"
+import TopCompanies from "../TopCompanies";
 
 
 function HeroComponent() {
@@ -79,7 +80,7 @@ function HeroComponent() {
     </section>
 
     {/* Features Section */}
-    <section className="py-20">
+    <section className="py-20 bg-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <h2 className="text-3xl font-bold tracking-tight text-primary sm:text-4xl">Why Choose Our Platform?</h2>
@@ -171,16 +172,17 @@ function HeroComponent() {
           <div className="mt-16 grid grid-cols-2 gap-8 md:grid-cols-3 lg:grid-cols-6">
             {[1, 2, 3, 4, 5, 6].map((i) => (
               <div key={i} className="flex items-center justify-center">
-                <div className="rounded-lg bg-white p-6 shadow-md transition-all hover:shadow-lg">
-                  <Image
-                    src={`/placeholder.svg?height=80&width=120&text=Company ${i}`}
-                    alt={`Company ${i}`}
-                    width={120}
-                    height={80}
-                    className="mx-auto"
-                  />
-                </div>
+              <div className="h-40 w-40 rounded-3xl bg-white p-4 shadow-md transition-all hover:shadow-lg flex items-center justify-center">
+                <Image
+                  src={`/placeholder.svg?height=80&width=120&text=Company ${i}`}
+                  alt={`Company ${i}`}
+                  width={80}
+                  height={80}
+                  className="object-contain"
+                />
               </div>
+            </div>
+            
             ))}
           </div>
 
@@ -192,6 +194,7 @@ function HeroComponent() {
             </button>
           </div>
         </div>
+        <TopCompanies/>
       </section>
 
       {/* CTA Section */}

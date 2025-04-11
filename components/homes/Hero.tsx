@@ -160,42 +160,7 @@ function HeroComponent() {
       </section>
 
       {/* Top Companies Section (For Students) */}
-      <section className="bg-muted py-20">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <h2 className="text-3xl font-bold tracking-tight text-primary sm:text-4xl">Top Companies Hiring</h2>
-            <p className="mx-auto mt-4 max-w-2xl text-lg text-gray-600">
-              Connect with industry-leading companies looking for fresh talent.
-            </p>
-          </div>
-
-          <div className="mt-16 grid grid-cols-2 gap-8 md:grid-cols-3 lg:grid-cols-6">
-            {[1, 2, 3, 4, 5, 6].map((i) => (
-              <div key={i} className="flex items-center justify-center">
-              <div className="h-40 w-40 rounded-3xl bg-white p-4 shadow-md transition-all hover:shadow-lg flex items-center justify-center">
-                <Image
-                  src={`/placeholder.svg?height=80&width=120&text=Company ${i}`}
-                  alt={`Company ${i}`}
-                  width={80}
-                  height={80}
-                  className="object-contain"
-                />
-              </div>
-            </div>
-            
-            ))}
-          </div>
-
-          <div className="mt-12 text-center">
-            <button  className="bg-primary text-white hover:bg-primary/90">
-              <Link href="/dashboard/student/view-jobs">
-                View All Jobs <ArrowRight className="ml-2 h-4 w-4" />
-              </Link>
-            </button>
-          </div>
-        </div>
-        <TopCompanies/>
-      </section>
+      <TopCompanies/>
 
       {/* CTA Section */}
     <section className="bg-gradient-to-r from-primary to-secondary py-20 text-white">

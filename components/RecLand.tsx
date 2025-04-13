@@ -8,7 +8,7 @@ interface FeatureProps {
 
 const Feature: React.FC<FeatureProps> = ({ title, description }) => {
   return (
-    <div className="bg-white p-6 shadow-md rounded-lg md:h-64 flex flex-col justify-center transition-transform duration-300 ease-in-out hover:scale-95 hover:shadow-lg">
+    <div className="bg-white p-6 shadow-md border border-gray-300 rounded-xl md:h-64 flex flex-col justify-center transition-transform duration-300 ease-in-out hover:scale-95 hover:shadow-lg">
       <h3 className="font-bold text-xl text-gray-900 mb-5">{title}</h3>
       <p className="text-gray-600">{description}</p>
       <p className="text-gray-500 text-sm">
@@ -50,14 +50,12 @@ const CompanyLanding: React.FC = () => {
       </div>
 
       <div className="mt-10 flex space-x-4">
-        {/* Learn More Button */}
-        <button className="bg-black text-white px-6 py-3 rounded-lg transition duration-300 transform hover:bg-gray-800 hover:scale-105">
+        <button className="bg-black text-white px-6 py-3 rounded-full transition duration-300 transform hover:bg-gray-800 hover:scale-105">
           Learn More
         </button>
 
-        {/* For Employers Button */}
         <Link href="/">
-          <button className="border border-black text-black px-6 py-3 rounded-lg transition duration-300 transform hover:bg-black hover:text-white hover:scale-105">
+          <button className="border border-black text-black px-6 py-3 rounded-full transition duration-300 transform hover:bg-black hover:text-white hover:scale-105">
             For Students
           </button>
         </Link>

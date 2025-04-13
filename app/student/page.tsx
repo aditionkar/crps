@@ -1,7 +1,7 @@
-import HomePage from "@/components/Home";
+import HomePage from "@/components/homes/Home";
 import { NavbarStudents } from "@/components/shared/navbar/NavbarStudents";
-import StudentLanding from "@/components/StuLand";
-import TopCompanies from "@/components/TopCompanies";
+import StudentLanding from "@/components/homes/StuLand";
+import TopCompanies from "@/components/homes/TopCompanies";
 import React from "react";
 
 

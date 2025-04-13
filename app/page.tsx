@@ -1,6 +1,6 @@
 "use client";
 
-import HomePage from "@/components/Home";
+import HomePage from "@/components/homes/Home";
 import HeroComponent from "@/components/homes/Main-Hero";
 import { Navbar } from "@/components/shared/navbar/Navbar";
 import { motion } from "framer-motion";

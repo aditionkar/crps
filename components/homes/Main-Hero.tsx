@@ -9,7 +9,7 @@ import {
   Calendar,
   Award,
 } from "lucide-react";
-import TopCompanies from "../TopCompanies";
+import TopCompanies from "./TopCompanies";
 
 function HeroComponent() {
   return (

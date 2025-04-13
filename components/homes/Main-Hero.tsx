@@ -42,14 +42,16 @@ function HeroComponent() {
               <div className="absolute -left-4 -top-4 h-72 w-72 rounded-full bg-accent-light opacity-50 blur-3xl"></div>
               <div className="absolute -bottom-8 -right-8 h-72 w-72 rounded-full bg-primary-light opacity-50 blur-3xl"></div>
               <div className="relative animate-float rounded-2xl bg-white/10 p-6 backdrop-blur-sm ">
-                <Image
-                  src="/placeholder.svg?height=400&width=600"
-                  width={600}
-                  height={400}
-                  alt="Campus Recruitment"
-                  className="rounded-xl "
-                  priority
-                />
+                <video
+                  src="/Business vision.mp4"
+                  width="600"
+                  height="400"
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  className="rounded-xl"
+                ></video>
               </div>
             </div>
           </div>
@@ -206,13 +208,13 @@ function HeroComponent() {
               platform to connect talent with opportunity.
             </p>
             <div className="mt-10 flex flex-col justify-center space-y-4 sm:flex-row sm:space-x-4 sm:space-y-0">
-              <button className="px-6 py-3 bg-white text-primary font-semibold rounded-lg hover:bg-accent-lighter">
-                <Link href="/auth/register?type=student">
+              <button className="px-6 py-3 bg-white text-primary font-semibold rounded-full hover:bg-accent-lighter transition duration-300">
+                <Link href="/signin">
                   Sign Up as Student
                 </Link>
               </button>
-              <button className="px-6 py-3 border border-white text-white font-semibold rounded-lg hover:bg-white/10">
-                <Link href="/auth/register?type=recruiter">
+              <button className="px-6 py-3 border border-white text-white font-semibold rounded-full hover:bg-white/10 transition duration-300">
+                <Link href="/signin">
                   Sign Up as Recruiter
                 </Link>
               </button>

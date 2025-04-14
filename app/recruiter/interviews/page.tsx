@@ -1,6 +1,6 @@
 "use client";
 import { NavbarRecruiters } from "@/components/shared/navbar/NavbarRecruiters";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaVideo, FaUser, FaCalendarAlt, FaClock } from "react-icons/fa";
 import { motion } from "framer-motion";
 
@@ -14,56 +14,25 @@ interface Interview {
   status: "Scheduled" | "Completed";
 }
 
-const mockInterviews: Interview[] = [
-  {
-    my_application_id: 1,
-    applicantName: "John Doe",
-    jobTitle: "Frontend Developer",
-    date: "March 10, 2025",
-    time: "10:00 AM",
-    mode: "Online",
-    status: "Scheduled",
-  },
-  {
-    my_application_id: 2,
-    applicantName: "Jane Smith",
-    jobTitle: "Backend Developer",
-    date: "March 12, 2025",
-    time: "2:00 PM",
-    mode: "In-person",
-    status: "Completed",
-  },
-  {
-    my_application_id: 3,
-    applicantName: "Alice Johnson",
-    jobTitle: "UI/UX Designer",
-    date: "March 15, 2025",
-    time: "11:00 AM",
-    mode: "Online",
-    status: "Scheduled",
-  },
-  {
-    my_application_id: 4,
-    applicantName: "Bob Brown",
-    jobTitle: "Data Scientist",
-    date: "March 18, 2025",
-    time: "3:00 PM",
-    mode: "In-person",
-    status: "Completed",
-  },
-  {
-    my_application_id: 5,
-    applicantName: "Charlie Davis",
-    jobTitle: "DevOps Engineer",
-    date: "March 20, 2025",
-    time: "9:00 AM",
-    mode: "Online",
-    status: "Scheduled",
-  },
-];
-
 function Interviews() {
-  const [interviews] = useState<Interview[]>(mockInterviews);
+  const [interviews, setInterviews] = useState<Interview[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchInterviews = async () => {
+      try {
+        const response = await fetch("/api/interviews"); 
+        const data = await response.json();
+        setInterviews(data);
+      } catch (error) {
+        console.error("Error fetching interviews:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchInterviews();
+  }, []);
 
   return (
     <>

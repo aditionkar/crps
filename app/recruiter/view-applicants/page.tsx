@@ -1,9 +1,10 @@
 "use client";
 import { NavbarRecruiters } from "@/components/shared/navbar/NavbarRecruiters";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios"; 
 
 interface Applicant {
-  id: number;
+  mock_applicant_id: number;
   name: string;
   email: string;
   jobTitle: string;
@@ -11,60 +12,28 @@ interface Applicant {
   resumeLink: string;
 }
 
-const mockApplicants: Applicant[] = [
-  {
-    id: 1,
-    name: "John Doe",
-    email: "johndoe@example.com",
-    jobTitle: "Frontend Developer",
-    company: "TechCorp",
-    resumeLink: "#",
-  },
-  {
-    id: 2,
-    name: "Jane Smith",
-    email: "janesmith@example.com",
-    jobTitle: "Backend Developer",
-    company: "InnovateX",
-    resumeLink: "#",
-  },
-  {
-    id: 3,
-    name: "Alice Johnson",
-    email: "alicejohnson@example.com",
-    jobTitle: "UI/UX Designer",
-    company: "Creative Minds",
-    resumeLink: "#",
-  },
-  {
-    id: 4,
-    name: "Robert Brown",
-    email: "robertbrown@example.com",
-    jobTitle: "Data Scientist",
-    company: "DataWorks",
-    resumeLink: "#",
-  },
-  {
-    id: 5,
-    name: "Michael Lee",
-    email: "michaellee@example.com",
-    jobTitle: "DevOps Engineer",
-    company: "CloudNet",
-    resumeLink: "#",
-  },
-];
-
 function ViewApplicantsOfJobs() {
-  const [applicants, setApplicants] = useState<Applicant[]>(mockApplicants);
+  const [applicants, setApplicants] = useState<Applicant[]>([]);
   const [scheduledInterviews, setScheduledInterviews] = useState<{
     [key: number]: string;
   }>({});
   const [rejectedApplicants, setRejectedApplicants] = useState<number[]>([]);
-  const [selectedApplicant, setSelectedApplicant] = useState<Applicant | null>(
-    null
-  );
+  const [selectedApplicant, setSelectedApplicant] = useState<Applicant | null>(null);
   const [selectedDate, setSelectedDate] = useState<string>("");
   const [selectedTime, setSelectedTime] = useState<string>("");
+
+  useEffect(() => {
+    const fetchApplicants = async () => {
+      try {
+        const response = await axios.get("/api/mock_applicants"); 
+        setApplicants(response.data);
+      } catch (error) {
+        console.error("Failed to fetch applicants:", error);
+      }
+    };
+
+    fetchApplicants();
+  }, []);
 
   const handleAccept = (applicant: Applicant) => {
     setSelectedApplicant(applicant);
@@ -75,7 +44,7 @@ function ViewApplicantsOfJobs() {
       const dateTime = `${selectedDate}T${selectedTime}`;
       setScheduledInterviews((prev) => ({
         ...prev,
-        [selectedApplicant.id]: dateTime,
+        [selectedApplicant.mock_applicant_id]: dateTime,
       }));
       setSelectedApplicant(null);
       setSelectedDate("");
@@ -87,7 +56,6 @@ function ViewApplicantsOfJobs() {
     setRejectedApplicants((prev) => [...prev, id]);
   };
 
-  // Function to format the date and time
   const formatDateTime = (dateTime: string) => {
     const date = new Date(dateTime);
     return date.toLocaleString("en-US", {
@@ -117,7 +85,7 @@ function ViewApplicantsOfJobs() {
             {applicants.length > 0 ? (
               applicants.map((applicant) => (
                 <div
-                  key={applicant.id}
+                  key={applicant.mock_applicant_id}
                   className="bg-white rounded-xl shadow-sm hover:shadow-md transition-all p-6 border border-[#91b6be]/30"
                 >
                   <div className="flex flex-col md:flex-row md:items-start justify-between gap-4">
@@ -133,12 +101,12 @@ function ViewApplicantsOfJobs() {
                         Applied for: {applicant.jobTitle} 
                       </p>
 
-                      {scheduledInterviews[applicant.id] ? (
+                      {scheduledInterviews[applicant.mock_applicant_id] ? (
                         <p className="bg-green-100 text-green-700 text-sm font-semibold px-3 py-1 rounded-md shadow-sm border border-green-400">
                            Interview Scheduled on:{" "}
-                          {formatDateTime(scheduledInterviews[applicant.id])}
+                          {formatDateTime(scheduledInterviews[applicant.mock_applicant_id])}
                         </p>
-                      ) : rejectedApplicants.includes(applicant.id) ? (
+                      ) : rejectedApplicants.includes(applicant.mock_applicant_id) ? (
                         <p className="bg-red-100 text-red-700 text-sm font-semibold px-3 py-1 rounded-md shadow-sm border border-red-400">
                            Application Rejected
                         </p>
@@ -154,8 +122,8 @@ function ViewApplicantsOfJobs() {
                       >
                         View Resume
                       </a>
-                      {!scheduledInterviews[applicant.id] &&
-                        !rejectedApplicants.includes(applicant.id) && (
+                      {!scheduledInterviews[applicant.mock_applicant_id] &&
+                        !rejectedApplicants.includes(applicant.mock_applicant_id) && (
                           <>
                             <button
                               onClick={() => handleAccept(applicant)}
@@ -164,7 +132,7 @@ function ViewApplicantsOfJobs() {
                               Accept & Schedule
                             </button>
                             <button
-                              onClick={() => handleReject(applicant.id)}
+                              onClick={() => handleReject(applicant.mock_applicant_id)}
                               className="relative px-4 py-2  isolation-auto z-10 border-2 border-red-700 before:absolute before:w-full before:transition-all before:duration-700 before:hover:w-full hover:text-white before:-right-full before:hover:right-0 before:rounded-full before:bg-[#A12347] before:-z-10 before:aspect-square before:hover:scale-150 overflow-hidden before:hover:duration-700 inline-flex items-center justify-center  text-sm  text-black bg-white rounded-lg shadow-sm gap-x-2 hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none"
                             >
                               Reject

@@ -130,7 +130,7 @@ function ViewApplicantsOfJobs() {
                         Email: {applicant.email}
                       </p>
                       <p className="text-[#89a9c4] text-sm">
-                        Applied for: {applicant.jobTitle} at {applicant.company}
+                        Applied for: {applicant.jobTitle} 
                       </p>
 
                       {scheduledInterviews[applicant.id] ? (

@@ -1,65 +1,64 @@
-
 "use client";
 import { NavbarRecruiters } from "@/components/shared/navbar/NavbarRecruiters";
 import React, { useState } from "react";
-import {
-  FaVideo,
-  FaUser,
-  FaCalendarAlt,
-  FaClock,
-  FaInfoCircle,
-} from "react-icons/fa"; // Import icons
-import { motion } from "framer-motion"; // Import motion for animations
+import { FaVideo, FaUser, FaCalendarAlt, FaClock } from "react-icons/fa";
+import { motion } from "framer-motion";
 
 interface Interview {
-  id: number;
+  my_application_id: number;
   applicantName: string;
   jobTitle: string;
   date: string;
   time: string;
   mode: string;
+  status: "Scheduled" | "Completed";
 }
 
 const mockInterviews: Interview[] = [
   {
-    id: 1,
+    my_application_id: 1,
     applicantName: "John Doe",
     jobTitle: "Frontend Developer",
     date: "March 10, 2025",
     time: "10:00 AM",
     mode: "Online",
+    status: "Scheduled",
   },
   {
-    id: 2,
+    my_application_id: 2,
     applicantName: "Jane Smith",
     jobTitle: "Backend Developer",
     date: "March 12, 2025",
     time: "2:00 PM",
     mode: "In-person",
+    status: "Completed",
   },
   {
-    id: 3,
+    my_application_id: 3,
     applicantName: "Alice Johnson",
     jobTitle: "UI/UX Designer",
     date: "March 15, 2025",
     time: "11:00 AM",
     mode: "Online",
+    status: "Scheduled",
   },
   {
-    id: 4,
+    my_application_id: 4,
     applicantName: "Bob Brown",
     jobTitle: "Data Scientist",
     date: "March 18, 2025",
     time: "3:00 PM",
     mode: "In-person",
+    status: "Completed",
   },
   {
-    id: 5,
+    my_application_id: 5,
     applicantName: "Charlie Davis",
     jobTitle: "DevOps Engineer",
     date: "March 20, 2025",
     time: "9:00 AM",
     mode: "Online",
+    status: "Scheduled",
   },
 ];
 
@@ -75,21 +74,21 @@ function Interviews() {
         </h1>
         <div className="w-full max-w-4xl space-y-6">
           {interviews.length > 0 ? (
-            interviews.map((interview) => (
+            interviews.map((interview, index) => (
               <motion.div
-                key={interview.id}
+                key={`${interview.my_application_id}-${index}`}
                 className="bg-white rounded-xl shadow-2xl p-6 hover:shadow-3xl transition-shadow duration-300"
-                whileHover={{ scale: 1.02 }} // Add hover scale animation
-                initial={{ opacity: 0, y: 20 }} // Fade-in animation
+                whileHover={{ scale: 1.02 }}
+                initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.3 }}
               >
-                <div className="flex items-center justify-between mb-4">
+                <div className="flex flex-wrap justify-between items-center mb-4 gap-2">
                   <h2 className="text-[#1f2021] font-bold text-2xl">
                     {interview.applicantName}
                   </h2>
                   <div
-                    className={`flex items-center text-white px-3 py-1 rounded-full mr-4 ${
+                    className={`flex items-center text-white px-3 py-1 rounded-full ${
                       interview.mode === "Online"
                         ? "bg-[#548d97]"
                         : "bg-[#e67e22]"
@@ -103,7 +102,8 @@ function Interviews() {
                     <span>{interview.mode}</span>
                   </div>
                 </div>
-                <div className="space-y-2">
+
+                <div className="space-y-2 mb-4">
                   <div className="flex items-center text-[#548d97]">
                     <FaCalendarAlt className="mr-2" />
                     <span>Date: {interview.date}</span>
@@ -113,23 +113,23 @@ function Interviews() {
                     <span>Time: {interview.time}</span>
                   </div>
                 </div>
-                <div className="mt-4 flex justify-between items-center">
+
+                <div className="flex flex-wrap justify-between items-center gap-3">
                   <span className="inline-block bg-[#89a9c4] text-white px-6 py-2 rounded-full text-sm">
                     Job Position:{" "}
                     <span className="font-semibold text-white">
                       {interview.jobTitle}
                     </span>
                   </span>
-                  <button
-                    className="flex items-center bg-[#2e657a] text-white px-4 py-2 rounded-lg hover:bg-[#1f4a5a] transition-colors duration-200 mr-4"
-                    onClick={() => {
-                      // Add functionality to view details
-                      console.log("View details for:", interview.applicantName);
-                    }}
+                  <span
+                    className={`px-4 py-2 rounded-full text-sm font-semibold text-white ${
+                      interview.status === "Scheduled"
+                        ? "bg-green-600"
+                        : "bg-blue-600"
+                    }`}
                   >
-                    <FaInfoCircle className="mr-2" />
-                    View Details
-                  </button>
+                    {interview.status}
+                  </span>
                 </div>
               </motion.div>
             ))

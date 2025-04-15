@@ -15,3 +15,43 @@ export async function GET() {
     return NextResponse.json({ error: "Failed to fetch interviews" }, { status: 500 });
   }
 }
+
+export async function POST(request: Request) {
+  try {
+    const body = await request.json();
+    const { 
+      my_application_id, 
+      applicantName, 
+      jobTitle, 
+      date, 
+      time, 
+      formattedDate, // New field for display
+      formattedTime, // New field for display
+      mode = "Online", 
+      status = "Scheduled" 
+    } = body;
+    
+    // Validate required fields
+    if (!my_application_id || !applicantName || !jobTitle || !date) {
+      return NextResponse.json(
+        { error: "Missing required fields" },
+        { status: 400 }
+      );
+    }
+
+    // Insert the new interview into the database
+    const [result] = await pool.query(
+      `INSERT INTO interview (my_application_id, applicantName, jobTitle, date, time, formatted_date, formatted_time, mode, status)
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+      [my_application_id, applicantName, jobTitle, date, time, formattedDate || date, formattedTime || time, mode, status]
+    );
+
+    return NextResponse.json({ success: true, data: result }, { status: 201 });
+  } catch (error) {
+    console.error("Error scheduling interview:", error);
+    return NextResponse.json(
+      { error: "Failed to schedule interview: " + (error as Error).message },
+      { status: 500 }
+    );
+  }
+}

@@ -4,13 +4,12 @@ import bcrypt from "bcryptjs";
 
 export async function POST(req: NextRequest): Promise<NextResponse> {
     try {
-        // Parse JSON data from request
+
         const body = await req.json();
         console.log("Received Data:", body);
 
         const { name, email, password, phone, resume_link, type, industry, website } = body;
 
-        // Validate required fields
         if (!name || !email || !password || !type) {
             return NextResponse.json({ success: false, message: "Missing required fields" }, { status: 400 });
         }
@@ -34,18 +33,17 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
             return NextResponse.json({ success: false, message: "Invalid type" }, { status: 400 });
         }
 
-        // Execute query and type the result properly
         const [result]: any = await pool.execute(query, values);
 
         return NextResponse.json({
             success: true,
             message: "User registered successfully",
-            id: (result as { insertId?: number })?.insertId || null, // Fix insertId typing
+            id: (result as { insertId?: number })?.insertId || null, 
         });
 
     } catch (error: unknown) {
         console.error("Sign-up Error:", error);
-        const errorMessage = error instanceof Error ? error.message : "Unknown error"; // Fix error.message typing
+        const errorMessage = error instanceof Error ? error.message : "Unknown error"; 
         return NextResponse.json({ success: false, message: "Internal Server Error", error: errorMessage }, { status: 500 });
     }
 }

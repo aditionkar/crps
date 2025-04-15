@@ -4,8 +4,8 @@ import bcrypt from "bcryptjs";
 
 export async function POST(req: NextRequest) {
     try {
-        const body = await req.text(); // Read request body as text
-        const { email, password, type } = JSON.parse(body); // Parse JSON manually
+        const body = await req.text(); 
+        const { email, password, type } = JSON.parse(body); 
 
         if (!email || !password || !type) {
             return NextResponse.json(
@@ -29,7 +29,6 @@ export async function POST(req: NextRequest) {
 
         const user = rows[0];
 
-        // Compare passwords
         const passwordMatch = await bcrypt.compare(password, user.password);
         if (!passwordMatch) {
             return NextResponse.json(

@@ -25,15 +25,11 @@ function HeroComponent() {
               for recruiters to discover exceptional talent.
             </p>
             <div className="mt-10 flex flex-col space-y-4 sm:flex-row sm:space-x-4 sm:space-y-0">
-              <Link href="/login">
-                <button className="px-6 py-3 bg-white text-[#2e657a] font-semibold rounded-full transition duration-300 ease-in-out hover:bg-[#e0f7ff] hover:shadow-lg">
+              <Link href="/login" className="px-6 py-3 bg-white text-[#2e657a] font-semibold rounded-full transition duration-300 ease-in-out hover:bg-[#e0f7ff] hover:shadow-lg">
                   Student Login
-                </button>
               </Link>
-              <Link href="/login">
-                <button className="px-6 py-3 border border-white text-white font-semibold rounded-full transition duration-300 ease-in-out hover:bg-white hover:text-[#2e657a] hover:shadow-lg">
+              <Link href="/login" className="px-6 py-3 border border-white text-white font-semibold rounded-full transition duration-300 ease-in-out hover:bg-white hover:text-[#2e657a] hover:shadow-lg">
                   Recruiter Login
-                </button>
               </Link>
             </div>
           </div>

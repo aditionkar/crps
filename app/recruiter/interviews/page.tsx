@@ -55,7 +55,6 @@ function Interviews() {
     }
     
     try {
-      // Handle SQL date format (YYYY-MM-DD)
       const date = new Date(interview.date);
       return date.toLocaleDateString('en-US', {
         year: 'numeric',
@@ -63,7 +62,7 @@ function Interviews() {
         day: 'numeric'
       });
     } catch (error) {
-      return interview.date; // Fall back to the original value
+      return interview.date; 
     }
   };
 
@@ -73,7 +72,6 @@ function Interviews() {
     }
     
     try {
-      // Handle SQL time format (HH:MM:SS)
       const time = new Date(`2000-01-01T${interview.time}`);
       return time.toLocaleTimeString('en-US', {
         hour: '2-digit',
@@ -81,7 +79,7 @@ function Interviews() {
         hour12: true
       });
     } catch (error) {
-      return interview.time; // Fall back to the original value
+      return interview.time; 
     }
   };
 

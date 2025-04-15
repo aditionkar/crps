@@ -2,7 +2,7 @@
 import { NavbarRecruiters } from "@/components/shared/navbar/NavbarRecruiters";
 import React, { useState, useEffect } from "react";
 import axios from "axios"; 
-import { toast } from "react-hot-toast"; // Optional, for notifications
+import { toast, Toaster } from "react-hot-toast"; 
 
 interface Applicant {
   mock_applicant_id: number;
@@ -23,6 +23,8 @@ function ViewApplicantsOfJobs() {
   const [selectedDate, setSelectedDate] = useState<string>("");
   const [selectedTime, setSelectedTime] = useState<string>("");
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+
+  
 
   useEffect(() => {
     const fetchApplicants = async () => {
@@ -46,31 +48,24 @@ function ViewApplicantsOfJobs() {
       try {
         setIsSubmitting(true);
         
-        // Get the interview mode from the select element
         const modeSelect = document.querySelector('select') as HTMLSelectElement;
         const mode = modeSelect ? modeSelect.value : "Online";
         
-        // Format date for display
         const formattedDate = new Date(selectedDate).toLocaleDateString('en-US', {
           year: 'numeric',
           month: 'long',
           day: 'numeric'
         });
         
-        // Format time for display
         const formattedTime = new Date(`2000-01-01T${selectedTime}`).toLocaleTimeString('en-US', {
           hour: '2-digit',
           minute: '2-digit',
           hour12: true
         });
         
-        // Format date in MySQL compatible format (YYYY-MM-DD)
-        const sqlDate = selectedDate; // This is already in YYYY-MM-DD format from the date input
+        const sqlDate = selectedDate; 
         
-        // Format time in MySQL compatible format (HH:MM:SS)
-        const sqlTime = selectedTime; // This is already in HH:MM format from the time input
-        
-        // Save interview to database
+        const sqlTime = selectedTime; 
         const response = await fetch("/api/interviews", {
           method: "POST",
           headers: {
@@ -85,7 +80,8 @@ function ViewApplicantsOfJobs() {
             formattedDate: formattedDate,
             formattedTime: formattedTime,
             mode: mode,
-            status: "Scheduled"
+            status: "Scheduled",
+            company: selectedApplicant.company 
           }),
         });
   
@@ -94,24 +90,20 @@ function ViewApplicantsOfJobs() {
           throw new Error(errorData.error || "Failed to schedule interview");
         }
   
-        // Update UI state
         const dateTime = `${selectedDate}T${selectedTime}`;
         setScheduledInterviews((prev) => ({
           ...prev,
           [selectedApplicant.mock_applicant_id]: dateTime,
         }));
   
-        // Reset form
         setSelectedApplicant(null);
         setSelectedDate("");
         setSelectedTime("");
         
-        // Optional: Show success notification
-        alert("Interview scheduled successfully!");
+        toast.success("Interview scheduled successfully!");
       } catch (error) {
         console.error("Failed to schedule interview:", error);
-        // Show error notification
-        alert(`Failed to schedule interview: ${error instanceof Error ? error.message : "Unknown error"}`);
+        toast.error(`Failed to schedule interview: ${error instanceof Error ? error.message : "Unknown error"}`);
       } finally {
         setIsSubmitting(false);
       }
@@ -137,6 +129,31 @@ function ViewApplicantsOfJobs() {
   return (
     <>
       <NavbarRecruiters />
+      <Toaster position="top-center" />
+      <Toaster
+      position="top-center"
+      reverseOrder={false}
+      gutter={8}
+      toastOptions={{
+        duration: 5000,
+        style: {
+          background: '#363636',
+          color: '#fff',
+        },
+        success: {
+          duration: 3000,
+          style: {
+            background: 'green',
+          },
+        },
+        error: {
+          duration: 4000,
+          style: {
+            background: 'red',
+          },
+        },
+      }}
+    />
       <div className="bg-[#dae1e6] min-h-screen pt-10 pb-16 px-6">
         <div className="max-w-5xl mx-auto">
           <div className="mb-8 mx-auto text-center">

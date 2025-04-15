@@ -25,13 +25,12 @@ export async function POST(request: Request) {
       jobTitle, 
       date, 
       time, 
-      formattedDate, // New field for display
-      formattedTime, // New field for display
+      formattedDate, 
+      formattedTime, 
       mode = "Online", 
       status = "Scheduled" 
     } = body;
     
-    // Validate required fields
     if (!my_application_id || !applicantName || !jobTitle || !date) {
       return NextResponse.json(
         { error: "Missing required fields" },
@@ -39,7 +38,6 @@ export async function POST(request: Request) {
       );
     }
 
-    // Insert the new interview into the database
     const [result] = await pool.query(
       `INSERT INTO interview (my_application_id, applicantName, jobTitle, date, time, formatted_date, formatted_time, mode, status)
        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,

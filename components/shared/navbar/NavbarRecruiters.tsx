@@ -13,7 +13,7 @@ export function NavbarRecruiters() {
           <div className="flex-shrink-0">
             <Link href="/">
               <span className="text-3xl font-semibold text-[#2e657a]">
-                Company name
+                Campus Connect
               </span>
             </Link>
           </div>

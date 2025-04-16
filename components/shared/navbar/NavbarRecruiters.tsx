@@ -10,7 +10,6 @@ export function NavbarRecruiters() {
     <nav className="w-full border-b bg-white ">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          {/* Company Name */}
           <div className="flex-shrink-0">
             <Link href="/">
               <span className="text-3xl font-semibold text-[#2e657a]">
@@ -22,31 +21,31 @@ export function NavbarRecruiters() {
           {/* Desktop Menu */}
           <div className="hidden md:flex gap-4">
             <Link href="/recruiter">
-              <button className="px-4 py-2 text-gray-600 hover:text-gray-900 transition-all duration-200 hover:scale-105 hover:bg-[#dae1e6] rounded-md">
+              <button className="px-4 py-2 text-gray-600 hover:text-gray-900 transition-all duration-200 hover:scale-105 hover:bg-[#dae1e6] rounded-[6px]">
                 Home
               </button>
             </Link>
 
             <Link href="/recruiter/post-jobs">
-              <button className="px-4 py-2 text-gray-600 hover:text-gray-900 transition-all duration-200 hover:scale-105 hover:bg-[#dae1e6] rounded-md">
+              <button className="px-4 py-2 text-gray-600 hover:text-gray-900 transition-all duration-200 hover:scale-105 hover:bg-[#dae1e6] rounded-[6px]">
                 Post Jobs
               </button>
             </Link>
 
             <Link href="/recruiter/view-applicants">
-              <button className="px-4 py-2 text-gray-600 hover:text-gray-900 transition-all duration-200 hover:scale-105 hover:bg-[#dae1e6] rounded-md">
+              <button className="px-4 py-2 text-gray-600 hover:text-gray-900 transition-all duration-200 hover:scale-105 hover:bg-[#dae1e6] rounded-[6px]">
                 View Applicants
               </button>
             </Link>
 
             <Link href="/recruiter/interviews">
-              <button className="px-4 py-2 text-gray-600 hover:text-gray-900 transition-all duration-200 hover:scale-105 hover:bg-[#dae1e6] rounded-md">
+              <button className="px-4 py-2 text-gray-600 hover:text-gray-900 transition-all duration-200 hover:scale-105 hover:bg-[#dae1e6] rounded-[6px]">
                 Interviews
               </button>
             </Link>
 
             <Link href="/">
-              <button className="w-full text-left px-4 py-2 bg-[#2e657a] text-white rounded-lg transition-all duration-200 hover:bg-[#548d97] hover:scale-105 hover:shadow-lg active:scale-95">
+              <button className="w-full text-left px-4 py-2 bg-[#2e657a] text-white rounded-[6px] transition-all duration-200 hover:bg-[#548d97] hover:scale-105 hover:shadow-lg active:scale-95">
                 Logout
               </button>
             </Link>
@@ -82,31 +81,31 @@ export function NavbarRecruiters() {
           </button>
           <nav className="flex flex-col space-y-4 mt-10">
             <Link href="/recruiter">
-              <button className="w-full text-left px-4 py-2 text-gray-600 hover:text-gray-900 duration-200 hover:scale-105 hover:bg-[#dae1e6] rounded-md">
+              <button className="w-full text-left px-4 py-2 text-gray-600 hover:text-gray-900 duration-200 hover:scale-105 hover:bg-[#dae1e6] rounded-[6px]">
                 Home
               </button>
             </Link>
 
             <Link href="/recruiter/post-jobs">
-              <button className="w-full text-left px-4 py-2 text-gray-600 hover:text-gray-900 duration-200 hover:scale-105 hover:bg-[#dae1e6] rounded-md">
+              <button className="w-full text-left px-4 py-2 text-gray-600 hover:text-gray-900 duration-200 hover:scale-105 hover:bg-[#dae1e6] rounded-[6px]">
                 Post Jobs
               </button>
             </Link>
 
             <Link href="/recruiter/view-applicants">
-              <button className="w-full text-left px-4 py-2 text-gray-600 hover:text-gray-900 duration-200 hover:scale-105 hover:bg-[#dae1e6] rounded-md">
+              <button className="w-full text-left px-4 py-2 text-gray-600 hover:text-gray-900 duration-200 hover:scale-105 hover:bg-[#dae1e6] rounded-[6px]">
                 View Applicants
               </button>
             </Link>
 
             <Link href="/recruiter/interviews">
-              <button className="w-full text-left px-4 py-2 text-gray-600 hover:text-gray-900 duration-200 hover:scale-105 hover:bg-[#dae1e6] rounded-md">
+              <button className="w-full text-left px-4 py-2 text-gray-600 hover:text-gray-900 duration-200 hover:scale-105 hover:bg-[#dae1e6] rounded-[6px]">
                 Interviews
               </button>
             </Link>
 
             <Link href="/">
-              <button className="w-full text-left px-4 py-2 text-gray-600 hover:text-gray-900 duration-200 hover:scale-105 hover:bg-[#dae1e6] rounded-md">
+              <button className="w-full text-left px-4 py-2 text-gray-600 hover:text-gray-900 duration-200 hover:scale-105 hover:bg-[#dae1e6] rounded-[6px]">
                 Logout
               </button>
             </Link>

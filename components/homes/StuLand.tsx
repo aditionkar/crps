@@ -25,7 +25,7 @@ const FeatureCard: React.FC<FeatureCardProps> = ({ title, description }) => {
 
 const StudentLanding: React.FC = () => {
   return (
-    <div className="min-h-screen flex flex-col justify-center items-center text-center px-10 bg-gradient-to-b from-[#c6f6ff] via-[#e3fbff] to-[#f9fafb]">
+    <div className="min-h-screen flex flex-col justify-center items-center text-center px-10 bg-gradient-to-b from-[#c6f6ff] via-[#e3fbff] to-white">
       <h1 className="md:text-6xl font-bold mb-4 text-[#2e657a] text-4xl">
         Unlock Your Career Potential with Ease
       </h1>

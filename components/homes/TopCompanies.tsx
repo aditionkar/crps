@@ -39,7 +39,7 @@ function TopCompanies() {
   ];
 
   return (
-    <section className="bg-muted py-20">
+    <section className="bg-white py-20">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center">
           <h2 className="text-3xl font-bold tracking-tight text-primary sm:text-4xl">
@@ -54,7 +54,7 @@ function TopCompanies() {
         <div className="mt-16 grid grid-cols-2 gap-8 md:grid-cols-3 lg:grid-cols-6">
           {companies.map((company, i) => (
             <div key={i} className="flex items-center justify-center">
-              <div className="h-40 w-40 rounded-3xl bg-white p-2 shadow-md hover:shadow-lg flex items-center justify-center">
+              <div className="h-40 w-40 rounded-3xl bg-[#e0f2f1] p-2 shadow-md hover:shadow-lg flex items-center justify-center">
                 <TiltedCard
                   imageSrc={company.imageSrc}
                   altText={company.altText}

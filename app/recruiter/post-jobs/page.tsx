@@ -53,7 +53,7 @@ function PostJobs() {
 
       const newJob = { ...job, posted_days_ago: 0 };
       setPostedJobs([...postedJobs, newJob]);
-      
+
       setJob({
         company_name: "",
         title: "",
@@ -63,16 +63,16 @@ function PostJobs() {
         city: "",
         requirements: "",
       });
-      
+
       setStatusMessage("Job posted successfully!");
-      
+
       router.refresh();
     } catch (error) {
       console.error("Error posting job:", error);
       setStatusMessage("Failed to post job. Please try again.");
     } finally {
       setIsSubmitting(false);
-      
+
       if (statusMessage === "Job posted successfully!") {
         setTimeout(() => setStatusMessage(""), 3000);
       }
@@ -86,40 +86,62 @@ function PostJobs() {
         <h1 className="text-[#2e657a] text-3xl font-bold mb-6">
           Post a New Job
         </h1>
-        
+
         {statusMessage && (
-  <div 
-    className={`mb-4 p-4 rounded-lg w-full max-w-2xl flex items-center justify-center shadow-sm animate-fadeIn ${
-      statusMessage === "Posting job..." ? "bg-blue-50 border border-blue-200" :
-      statusMessage === "Job posted successfully!" ? "bg-green-50 border border-green-200" :
-      "bg-red-50 border border-red-200"
-    }`}
-  >
-    <div className="mr-3">
-      {statusMessage === "Posting job..." ? (
-        <div className="w-5 h-5 border-2 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
-      ) : statusMessage === "Job posted successfully!" ? (
-        <svg className="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
-          <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path>
-        </svg>
-      ) : (
-        <svg className="w-5 h-5 text-red-500" fill="currentColor" viewBox="0 0 20 20">
-          <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd"></path>
-        </svg>
-      )}
-    </div>
-    <p className={`font-medium ${
-      statusMessage === "Posting job..." ? "text-blue-700" :
-      statusMessage === "Job posted successfully!" ? "text-green-700" :
-      "text-red-700"
-    }`}>
-      {statusMessage}
-    </p>
-  </div>
-)}
-        
+          <div
+            className={`mb-4 p-4 rounded-[12px] w-full max-w-2xl flex items-center justify-center shadow-sm animate-fadeIn ${
+              statusMessage === "Posting job..."
+                ? "bg-blue-50 border border-blue-200"
+                : statusMessage === "Job posted successfully!"
+                ? "bg-green-50 border border-green-200"
+                : "bg-red-50 border border-red-200"
+            }`}
+          >
+            <div className="mr-3">
+              {statusMessage === "Posting job..." ? (
+                <div className="w-5 h-5 border-2 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+              ) : statusMessage === "Job posted successfully!" ? (
+                <svg
+                  className="w-5 h-5 text-green-500"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                    clipRule="evenodd"
+                  ></path>
+                </svg>
+              ) : (
+                <svg
+                  className="w-5 h-5 text-red-500"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
+                    clipRule="evenodd"
+                  ></path>
+                </svg>
+              )}
+            </div>
+            <p
+              className={`font-medium ${
+                statusMessage === "Posting job..."
+                  ? "text-blue-700"
+                  : statusMessage === "Job posted successfully!"
+                  ? "text-green-700"
+                  : "text-red-700"
+              }`}
+            >
+              {statusMessage}
+            </p>
+          </div>
+        )}
+
         <form
-          className="w-full max-w-2xl bg-white shadow-lg rounded-lg p-6 space-y-4"
+          className="w-full max-w-2xl bg-white shadow-lg rounded-[12px] p-6 space-y-4"
           onSubmit={handleSubmit}
         >
           <input
@@ -188,7 +210,7 @@ function PostJobs() {
           />
           <button
             type="submit"
-            className="mt-2 bg-[#78bed8] text-white px-4 py-2 rounded-md hover:bg-[#548d97] w-full"
+            className="mt-2 bg-[#78bed8] text-white px-4 py-2 rounded-[6px] hover:bg-[#548d97] w-full"
             disabled={isSubmitting}
           >
             {isSubmitting ? "Posting..." : "Post Job"}
@@ -196,9 +218,13 @@ function PostJobs() {
         </form>
 
         <div className="w-full max-w-2xl mt-6 space-y-4">
-          <h2 className="text-[#2e657a] text-xl font-bold">Recently Posted Jobs</h2>
+          <h2 className="text-[#2e657a] text-xl font-bold">
+            Recently Posted Jobs
+          </h2>
           {postedJobs.length === 0 ? (
-            <p className="text-gray-500 text-center py-4">No jobs posted yet.</p>
+            <p className="text-gray-500 text-center py-4">
+              No jobs posted yet.
+            </p>
           ) : (
             postedJobs.map((job, index) => (
               <div
@@ -257,27 +283,31 @@ function PostJobs() {
                         </span>
                         :
                       </h4>
-                      <p className="text-sm text-[#1f2021]">{job.description}</p>
+                      <p className="text-sm text-[#1f2021]">
+                        {job.description}
+                      </p>
                     </div>
                     <div>
                       <h4 className="text-sm font-medium text-[#2e657a] mb-1">
                         Requirements:
                       </h4>
-                      <p className="text-sm text-[#1f2021]">{job.requirements}</p>
+                      <p className="text-sm text-[#1f2021]">
+                        {job.requirements}
+                      </p>
                     </div>
                   </div>
                 </div>
 
                 <div className="flex flex-col sm:flex-row gap-2 mt-6 pt-4 border-t border-[#91b6be]/20">
-                  <button className="bg-[#78bed8] text-white px-6 py-2 rounded-lg hover:bg-[#548d97] transition-colors flex-1 flex items-center justify-center">
+                  <button className="bg-[#78bed8] text-white px-6 py-2 rounded-[8px] hover:bg-[#548d97] transition-colors flex-1 flex items-center justify-center">
                     Apply Now
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </button>
-                  <button className="border border-gray-400 text-gray-700 px-6 py-2 rounded-lg hover:bg-gray-100 transition-colors flex-1 flex items-center justify-center">
+                  <button className="border border-gray-400 text-gray-700 px-6 py-2 rounded-[8px] hover:bg-gray-100 transition-colors flex-1 flex items-center justify-center">
                     Company Website
                     <ExternalLink className="ml-2 h-4 w-4" />
                   </button>
-                  <button className="border border-green-500 font-medium text-green-500 px-6 py-2 rounded-lg hover:bg-green-100 transition-colors sm:flex-initial">
+                  <button className="border border-green-500 font-medium text-green-500 px-6 py-2 rounded-[8px] hover:bg-green-100 transition-colors sm:flex-initial">
                     Save
                   </button>
                 </div>

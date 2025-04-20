@@ -198,7 +198,7 @@ function ViewApplicantsOfJobs() {
 
                     <div className="flex flex-col sm:flex-row gap-2 mt-7 px-8">
                       <a
-                        href={applicant.resumeLink}
+                        href={`/resume/${applicant.resumeLink.split('/').pop()}`}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="bg-[#78bed8] text-white px-4 py-2 rounded-md hover:bg-[#548d97] transition-colors flex items-center justify-center"

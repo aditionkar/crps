@@ -20,16 +20,7 @@ export function Navbar() {
 
           {/* Desktop Menu */}
           <div className="hidden md:flex gap-4">
-            <Link href="/student">
-              <button className="px-4 py-2 text-gray-600 hover:text-gray-900 transition-all duration-200 hover:scale-105 hover:bg-[#dae1e6] rounded-[6px]">
-                Student Dashboard
-              </button>
-            </Link>
-            <Link href="/recruiter">
-              <button className="px-4 py-2 text-gray-600 hover:text-gray-900 transition-all duration-200 hover:scale-105 hover:bg-[#dae1e6] rounded-[6px]">
-                Recruiter Dashboard
-              </button>
-            </Link>
+            
             <Link href="/login">
               <button className="px-4 py-2 text-gray-600 hover:text-gray-900 transition-all duration-200 hover:scale-105 hover:bg-[#dae1e6] rounded-[6px]">
                 Login

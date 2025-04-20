@@ -121,13 +121,13 @@ const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
                   <div className="w-full px-3">
                     <button
                       type="submit"
-                      className="block w-full text-white text-sm font-semibold rounded-lg px-4 py-2 bg-[#78bed8] hover:bg-[#4d8ba1]"
+                      className="block w-full text-white text-sm font-semibold rounded-[8px] px-4 py-2 bg-[#78bed8] hover:bg-[#4d8ba1]"
                     >
                       Login
                     </button>
                     <Link
                       href="/signin"
-                      className="mt-3 text-center block w-full bg-[#78bed8] hover:bg-[#4d8ba1] text-white text-sm font-semibold rounded-lg px-4 py-2"
+                      className="mt-3 text-center block w-full bg-[#78bed8] hover:bg-[#4d8ba1] text-white text-sm font-semibold rounded-[8px] px-4 py-2"
                     >
                       Don't have an account? Sign in here
                     </Link>

@@ -156,9 +156,9 @@ function SignUpPage() {
                     <input type="text" name="website" placeholder="https://company-website.com" value={companyData.website} onChange={handleChange} className="input-field" />
                   </>
                 )}
-                <button type="submit" className="block w-full text-white text-sm font-semibold mt-3 rounded-lg px-4 py-2 bg-[#78bed8] hover:bg-[#4d8ba1]">Create Account</button>
+                <button type="submit" className="block w-full text-white text-sm font-semibold mt-3 rounded-[8px] px-4 py-2 bg-[#78bed8] hover:bg-[#4d8ba1]">Create Account</button>
               </form>
-              <Link href="/login" className="mt-2 text-center block w-full bg-[#78bed8] hover:bg-[#4d8ba1] text-white text-sm font-semibold rounded-lg px-4 py-2">
+              <Link href="/login" className="mt-2 text-center block w-full bg-[#78bed8] hover:bg-[#4d8ba1] text-white text-sm font-semibold rounded-[8px] px-4 py-2">
                 Already have an account? Log in here
               </Link>
               <div className="mt-4 text-center text-xs text-gray-600 flex justify-center">

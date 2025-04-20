@@ -15,3 +15,23 @@ export async function GET() {
     return NextResponse.json({ error: "Failed to fetch jobs" }, { status: 500 });
   }
 }
+
+export async function POST(request: Request) {
+  try {
+    const job = await request.json();
+    
+    // Add posted_days_ago as 0 for newly posted jobs
+    job.posted_days_ago = 0;
+    
+    const [result] = await pool.query(
+      `INSERT INTO jobs (company_name, title, description, location, salary, city, requirements, posted_days_ago) 
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
+      [job.company_name, job.title, job.description, job.location, job.salary, job.city, job.requirements, job.posted_days_ago]
+    );
+    
+    return NextResponse.json({ message: "Job posted successfully" }, { status: 201 });
+  } catch (error) {
+    console.error("Error posting job:", error);
+    return NextResponse.json({ error: "Failed to post job" }, { status: 500 });
+  }
+}

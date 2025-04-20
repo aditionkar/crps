@@ -149,15 +149,15 @@ const JobCard: React.FC<{ job: Job }> = ({ job }) => {
       </div>
 
       <div className="flex flex-col sm:flex-row gap-2 mt-6 pt-4 border-t border-[#91b6be]/20">
-        <button className="bg-[#78bed8] text-white px-6 py-2 rounded-lg hover:bg-[#548d97] transition-colors flex-1 flex items-center justify-center">
+        <button className="bg-[#78bed8] text-white px-6 py-2 rounded-[8px] hover:bg-[#548d97] transition-colors flex-1 flex items-center justify-center">
           Apply Now
           <ArrowRight className="ml-2 h-4 w-4" />
         </button>
-        <button className="border border-gray-400 text-gray-700 px-6 py-2 rounded-lg hover:bg-gray-100 transition-colors flex-1 flex items-center justify-center">
+        <button className="border border-gray-400 text-gray-700 px-6 py-2 rounded-[8px] hover:bg-gray-100 transition-colors flex-1 flex items-center justify-center">
           Company Website
           <ExternalLink className="ml-2 h-4 w-4" />
         </button>
-        <button className="border border-green-500 font-medium text-green-500 px-6 py-2 rounded-lg hover:bg-green-100 transition-colors sm:flex-initial">
+        <button className="border border-green-500 font-medium text-green-500 px-6 py-2 rounded-[8px] hover:bg-green-100 transition-colors sm:flex-initial">
           Save
         </button>
       </div>

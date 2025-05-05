@@ -2,7 +2,8 @@
 
 import { NavbarStudents } from "@/components/shared/navbar/NavbarStudents";
 import React, { useEffect, useState } from "react";
-import { CheckCircle, ChevronRight } from "lucide-react";
+import { CheckCircle, ChevronRight, AlertCircle } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 interface Application {
   my_application_id: number;
@@ -30,21 +31,38 @@ interface Application {
 const StudentsApplications = () => {
   const [applications, setApplications] = useState<Application[]>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const router = useRouter();
 
   useEffect(() => {
     const fetchApplications = async () => {
       try {
+        setLoading(true);
         const response = await fetch("/api/my_applications");
+        
+        if (!response.ok) {
+          // If response is not OK (e.g., 401 Unauthorized), handle accordingly
+          if (response.status === 401) {
+            // Redirect to login if unauthorized
+            router.push("/login");
+            return;
+          }
+          throw new Error(`Error: ${response.status}`);
+        }
+        
         const data = await response.json();
         setApplications(data);
+        setError(null);
       } catch (error) {
         console.error("Error fetching applications:", error);
+        setError("Failed to load your applications. Please try again later.");
       } finally {
         setLoading(false);
       }
     };
+    
     fetchApplications();
-  }, []);
+  }, [router]);
 
   return (
     <>
@@ -60,6 +78,13 @@ const StudentsApplications = () => {
             </p>
           </div>
 
+          {error && (
+            <div className="bg-red-50 border border-red-200 rounded-xl p-4 mb-6 flex items-start">
+              <AlertCircle className="h-5 w-5 text-red-500 mr-2 mt-0.5" />
+              <p className="text-red-700">{error}</p>
+            </div>
+          )}
+
           <div className="w-full space-y-6">
             {loading ? (
               <div className="bg-white rounded-xl shadow-sm p-6 text-center">
@@ -67,7 +92,7 @@ const StudentsApplications = () => {
               </div>
             ) : applications.length === 0 ? (
               <div className="bg-white rounded-xl shadow-sm p-6 text-center">
-                <p className="text-[#548d97]">No applications found.</p>
+                <p className="text-[#548d97]">No applications found. Start applying for jobs to see them here!</p>
               </div>
             ) : (
               applications.map((application) => (

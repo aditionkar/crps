@@ -17,3 +17,25 @@ export async function GET() {
     return NextResponse.json({ error: "Failed to fetch mock applicants" }, { status: 500 });
   }
 }
+
+// DELETE method to remove a specific applicant
+export async function DELETE(request: Request) {
+  try {
+    const { searchParams } = new URL(request.url);
+    const applicantId = searchParams.get('applicantId');
+    
+    if (!applicantId) {
+      return NextResponse.json({ error: "Applicant ID is required" }, { status: 400 });
+    }
+
+    const [result] = await pool.query(
+      "DELETE FROM mock_applicants WHERE mock_applicant_id = ?",
+      [applicantId]
+    );
+
+    return NextResponse.json({ message: "Applicant removed successfully" }, { status: 200 });
+  } catch (error) {
+    console.error("Error deleting mock applicant:", error);
+    return NextResponse.json({ error: "Failed to delete mock applicant" }, { status: 500 });
+  }
+}

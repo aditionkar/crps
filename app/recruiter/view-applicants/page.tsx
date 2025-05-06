@@ -29,23 +29,38 @@ function ViewApplicantsOfJobs() {
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
   useEffect(() => {
-    const fetchApplicants = async () => {
-      try {
-        const response = await axios.get("/api/mock_applicants");
-        setApplicants(response.data);
-      } catch (error) {
-        console.error("Failed to fetch applicants:", error);
-      }
-    };
-
     fetchApplicants();
   }, []);
+
+  const fetchApplicants = async () => {
+    try {
+      const response = await axios.get("/api/mock_applicants");
+      setApplicants(response.data);
+    } catch (error) {
+      console.error("Failed to fetch applicants:", error);
+      toast.error("Failed to load applicants");
+    }
+  };
+
+  const deleteApplicantRecord = async (applicantId: number) => {
+    try {
+      await axios.delete(`/api/mock_applicants?applicantId=${applicantId}`);
+      console.log("Applicant record deleted successfully");
+      
+      // Update local state to remove the applicant from the list
+      setApplicants((prev) => 
+        prev.filter((app) => app.mock_applicant_id !== applicantId)
+      );
+    } catch (error) {
+      console.error("Failed to delete applicant record:", error);
+      // Don't show an error toast as this is a background operation
+    }
+  };
 
   const handleAccept = (applicant: Applicant) => {
     setSelectedApplicant(applicant);
   };
 
-  // Updated handleScheduleInterview function to match the new API
   const handleScheduleInterview = async () => {
     if (selectedApplicant && selectedDate && selectedTime) {
       try {
@@ -131,6 +146,9 @@ function ViewApplicantsOfJobs() {
           [selectedApplicant.mock_applicant_id]: dateTime,
         }));
 
+        // Delete the record from mock_applicants table
+        await deleteApplicantRecord(selectedApplicant.mock_applicant_id);
+
         setSelectedApplicant(null);
         setSelectedDate("");
         setSelectedTime("");
@@ -149,8 +167,7 @@ function ViewApplicantsOfJobs() {
     }
   };
 
-  // Updated handleReject function to match the new API
-  const handleReject = async (applicant: any) => {
+  const handleReject = async (applicant: Applicant) => {
     try {
       // First, update the local state
       setRejectedApplicants((prev) => [...prev, applicant.mock_applicant_id]);
@@ -177,6 +194,9 @@ function ViewApplicantsOfJobs() {
       } else {
         console.log("Application status updated successfully");
       }
+
+      // Delete the record from mock_applicants table
+      await deleteApplicantRecord(applicant.mock_applicant_id);
 
       toast.success("Application rejected");
     } catch (error) {

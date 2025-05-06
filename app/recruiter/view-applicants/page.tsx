@@ -1,11 +1,13 @@
 "use client";
 import { NavbarRecruiters } from "@/components/shared/navbar/NavbarRecruiters";
 import React, { useState, useEffect } from "react";
-import axios from "axios"; 
-import { toast, Toaster } from "react-hot-toast"; 
+import axios from "axios";
+import { toast, Toaster } from "react-hot-toast";
 
 interface Applicant {
   mock_applicant_id: number;
+  job_id: number;
+  student_id: number;
   name: string;
   email: string;
   jobTitle: string;
@@ -19,17 +21,17 @@ function ViewApplicantsOfJobs() {
     [key: number]: string;
   }>({});
   const [rejectedApplicants, setRejectedApplicants] = useState<number[]>([]);
-  const [selectedApplicant, setSelectedApplicant] = useState<Applicant | null>(null);
+  const [selectedApplicant, setSelectedApplicant] = useState<Applicant | null>(
+    null
+  );
   const [selectedDate, setSelectedDate] = useState<string>("");
   const [selectedTime, setSelectedTime] = useState<string>("");
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
-  
-
   useEffect(() => {
     const fetchApplicants = async () => {
       try {
-        const response = await axios.get("/api/mock_applicants"); 
+        const response = await axios.get("/api/mock_applicants");
         setApplicants(response.data);
       } catch (error) {
         console.error("Failed to fetch applicants:", error);
@@ -43,30 +45,39 @@ function ViewApplicantsOfJobs() {
     setSelectedApplicant(applicant);
   };
 
+  // Updated handleScheduleInterview function to match the new API
   const handleScheduleInterview = async () => {
     if (selectedApplicant && selectedDate && selectedTime) {
       try {
         setIsSubmitting(true);
-        
-        const modeSelect = document.querySelector('select') as HTMLSelectElement;
+
+        const modeSelect = document.querySelector(
+          "select"
+        ) as HTMLSelectElement;
         const mode = modeSelect ? modeSelect.value : "Online";
-        
-        const formattedDate = new Date(selectedDate).toLocaleDateString('en-US', {
-          year: 'numeric',
-          month: 'long',
-          day: 'numeric'
+
+        const formattedDate = new Date(selectedDate).toLocaleDateString(
+          "en-US",
+          {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          }
+        );
+
+        const formattedTime = new Date(
+          `2000-01-01T${selectedTime}`
+        ).toLocaleTimeString("en-US", {
+          hour: "2-digit",
+          minute: "2-digit",
+          hour12: true,
         });
-        
-        const formattedTime = new Date(`2000-01-01T${selectedTime}`).toLocaleTimeString('en-US', {
-          hour: '2-digit',
-          minute: '2-digit',
-          hour12: true
-        });
-        
-        const sqlDate = selectedDate; 
-        
-        const sqlTime = selectedTime; 
-        const response = await fetch("/api/interviews", {
+
+        const sqlDate = selectedDate;
+        const sqlTime = selectedTime;
+
+        // First, schedule the interview
+        const interviewResponse = await fetch("/api/interviews", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -81,37 +92,97 @@ function ViewApplicantsOfJobs() {
             formattedTime: formattedTime,
             mode: mode,
             status: "Scheduled",
-            company: selectedApplicant.company 
+            company: selectedApplicant.company,
           }),
         });
-  
-        if (!response.ok) {
-          const errorData = await response.json();
+
+        if (!interviewResponse.ok) {
+          const errorData = await interviewResponse.json();
           throw new Error(errorData.error || "Failed to schedule interview");
         }
-  
+
+        // Then, update the application status
+        const updateResponse = await fetch("/api/my_applications", {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            studentId: selectedApplicant.student_id,
+            jobId: selectedApplicant.job_id,
+            action: "accept",
+            interviewDate: sqlDate, // Using the same date selected for the interview
+          }),
+        });
+
+        if (!updateResponse.ok) {
+          console.error(
+            "Failed to update application status:",
+            await updateResponse.text()
+          );
+          // Continue with the rest of the function even if this fails
+        } else {
+          console.log("Application status updated successfully");
+        }
+
         const dateTime = `${selectedDate}T${selectedTime}`;
         setScheduledInterviews((prev) => ({
           ...prev,
           [selectedApplicant.mock_applicant_id]: dateTime,
         }));
-  
+
         setSelectedApplicant(null);
         setSelectedDate("");
         setSelectedTime("");
-        
+
         toast.success("Interview scheduled successfully!");
       } catch (error) {
         console.error("Failed to schedule interview:", error);
-        toast.error(`Failed to schedule interview: ${error instanceof Error ? error.message : "Unknown error"}`);
+        toast.error(
+          `Failed to schedule interview: ${
+            error instanceof Error ? error.message : "Unknown error"
+          }`
+        );
       } finally {
         setIsSubmitting(false);
       }
     }
   };
 
-  const handleReject = (id: number) => {
-    setRejectedApplicants((prev) => [...prev, id]);
+  // Updated handleReject function to match the new API
+  const handleReject = async (applicant) => {
+    try {
+      // First, update the local state
+      setRejectedApplicants((prev) => [...prev, applicant.mock_applicant_id]);
+
+      // Then, update the application status in the database
+      const updateResponse = await fetch("/api/my_applications", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          studentId: applicant.student_id,
+          jobId: applicant.job_id,
+          action: "reject",
+        }),
+      });
+
+      if (!updateResponse.ok) {
+        console.error(
+          "Failed to update application status:",
+          await updateResponse.text()
+        );
+        // Continue showing the toast even if this fails
+      } else {
+        console.log("Application status updated successfully");
+      }
+
+      toast.success("Application rejected");
+    } catch (error) {
+      console.error("Failed to reject application:", error);
+      // Don't show error toast since we're proceeding even if status update fails
+    }
   };
 
   const formatDateTime = (dateTime: string) => {
@@ -131,29 +202,29 @@ function ViewApplicantsOfJobs() {
       <NavbarRecruiters />
       <Toaster position="top-center" />
       <Toaster
-      position="top-center"
-      reverseOrder={false}
-      gutter={8}
-      toastOptions={{
-        duration: 5000,
-        style: {
-          background: '#363636',
-          color: '#fff',
-        },
-        success: {
-          duration: 3000,
+        position="top-center"
+        reverseOrder={false}
+        gutter={8}
+        toastOptions={{
+          duration: 5000,
           style: {
-            background: 'green',
+            background: "#363636",
+            color: "#fff",
           },
-        },
-        error: {
-          duration: 4000,
-          style: {
-            background: 'red',
+          success: {
+            duration: 3000,
+            style: {
+              background: "green",
+            },
           },
-        },
-      }}
-    />
+          error: {
+            duration: 4000,
+            style: {
+              background: "red",
+            },
+          },
+        }}
+      />
       <div className="bg-[#dae1e6] min-h-screen pt-10 pb-16 px-6">
         <div className="max-w-5xl mx-auto">
           <div className="mb-8 mx-auto text-center">
@@ -172,7 +243,6 @@ function ViewApplicantsOfJobs() {
                   className="bg-white rounded-xl shadow-sm hover:shadow-md transition-all p-6 border border-[#91b6be]/30"
                 >
                   <div className="flex flex-col md:flex-row md:items-start justify-between gap-4">
-
                     <div className="space-y-2 flex-1">
                       <h2 className="text-[#1f2021] font-bold text-xl md:text-2xl">
                         {applicant.name}
@@ -181,24 +251,30 @@ function ViewApplicantsOfJobs() {
                         Email: {applicant.email}
                       </p>
                       <p className="text-[#89a9c4] text-sm">
-                        Applied for: {applicant.jobTitle} 
+                        Applied for: {applicant.jobTitle}
                       </p>
 
                       {scheduledInterviews[applicant.mock_applicant_id] ? (
                         <p className="bg-green-100 text-green-700 text-sm font-semibold px-3 py-1 rounded-md shadow-sm border border-green-400">
-                           Interview Scheduled on:{" "}
-                          {formatDateTime(scheduledInterviews[applicant.mock_applicant_id])}
+                          Interview Scheduled on:{" "}
+                          {formatDateTime(
+                            scheduledInterviews[applicant.mock_applicant_id]
+                          )}
                         </p>
-                      ) : rejectedApplicants.includes(applicant.mock_applicant_id) ? (
+                      ) : rejectedApplicants.includes(
+                          applicant.mock_applicant_id
+                        ) ? (
                         <p className="bg-red-100 text-red-700 text-sm font-semibold px-3 py-1 rounded-md shadow-sm border border-red-400">
-                           Application Rejected
+                          Application Rejected
                         </p>
                       ) : null}
                     </div>
 
                     <div className="flex flex-col sm:flex-row gap-2 mt-7 px-8">
                       <a
-                        href={`/resume/${applicant.resumeLink.split('/').pop()}`}
+                        href={`/resume/${applicant.resumeLink
+                          .split("/")
+                          .pop()}`}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="bg-[#78bed8] text-white px-4 py-2 rounded-[6px] hover:bg-[#548d97] transition-colors flex items-center justify-center"
@@ -206,7 +282,9 @@ function ViewApplicantsOfJobs() {
                         View Resume
                       </a>
                       {!scheduledInterviews[applicant.mock_applicant_id] &&
-                        !rejectedApplicants.includes(applicant.mock_applicant_id) && (
+                        !rejectedApplicants.includes(
+                          applicant.mock_applicant_id
+                        ) && (
                           <>
                             <button
                               onClick={() => handleAccept(applicant)}
@@ -215,8 +293,8 @@ function ViewApplicantsOfJobs() {
                               Accept & Schedule
                             </button>
                             <button
-                              onClick={() => handleReject(applicant.mock_applicant_id)}
-                              className="relative px-4 py-2  isolation-auto z-10 border-2 border-red-700 before:absolute before:w-full before:transition-all before:duration-700 before:hover:w-full hover:text-white before:-right-full before:hover:right-0 before:rounded-[100%] before:bg-[#A12347] before:-z-10 before:aspect-square before:hover:scale-150 overflow-hidden before:hover:duration-700 inline-flex items-center justify-center  text-sm  text-black bg-white rounded-[6px] shadow-sm gap-x-2 hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none"
+                              onClick={() => handleReject(applicant)}
+                              className="relative px-4 py-2 isolation-auto z-10 border-2 border-red-700 before:absolute before:w-full before:transition-all before:duration-700 before:hover:w-full hover:text-white before:-right-full before:hover:right-0 before:rounded-[100%] before:bg-[#A12347] before:-z-10 before:aspect-square before:hover:scale-150 overflow-hidden before:hover:duration-700 inline-flex items-center justify-center text-sm text-black bg-white rounded-[6px] shadow-sm gap-x-2 hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none"
                             >
                               Reject
                             </button>

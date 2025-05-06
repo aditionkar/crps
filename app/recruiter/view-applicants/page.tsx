@@ -150,7 +150,7 @@ function ViewApplicantsOfJobs() {
   };
 
   // Updated handleReject function to match the new API
-  const handleReject = async (applicant) => {
+  const handleReject = async (applicant: any) => {
     try {
       // First, update the local state
       setRejectedApplicants((prev) => [...prev, applicant.mock_applicant_id]);

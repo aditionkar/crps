@@ -41,9 +41,7 @@ const StudentsApplications = () => {
         const response = await fetch("/api/my_applications");
         
         if (!response.ok) {
-          // If response is not OK (e.g., 401 Unauthorized), handle accordingly
           if (response.status === 401) {
-            // Redirect to login if unauthorized
             router.push("/login");
             return;
           }

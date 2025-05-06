@@ -1,8 +1,7 @@
-// lib/auth.ts
 import { cookies } from "next/headers";
 import jwt from "jsonwebtoken";
 
-const JWT_SECRET = process.env.JWT_SECRET || "your-secret-key"; // Use environment variable in production
+const JWT_SECRET = process.env.JWT_SECRET || "your-secret-key";
 
 export interface SessionData {
     userId: number;
@@ -18,9 +17,8 @@ export async function createSession(userData: SessionData): Promise<string> {
 
 export async function verifyAuth(): Promise<SessionData | null> {
     try {
-        // Get the cookie in a way that works with Next.js App Router
-        const cookiesList = cookies();
-        const sessionCookie = cookiesList.get("session");
+        const cookieStore = await cookies();
+        const sessionCookie = cookieStore.get("session");
         
         if (!sessionCookie) {
             return null;
